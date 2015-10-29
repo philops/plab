@@ -1,0 +1,188 @@
+2014-07-10 Hunter Haugen <hunter@puppetlabs.com> - 1.2.5
+=========================================================
+ Morgan Haskel <morgan@puppetlabs.com> (5):
+  * Require rspec >= 2.99 since the tests have been converted to rspec3.
+  * Remove windows support.
+  * Merge pull request #73 from apenney/rip-out-puppet-files-mistake
+  * 1.2.5 prep.
+  * Remove AIX 5.3 support as we can't test against it.
+ 
+ Hunter Haugen <hunter@puppetlabs.com> (3):
+  * Pin to new beaker-rspec
+  * Pin rspec ~> 2.99 due to bundle issues
+  * openssl on sol 11 is in /usr/bin
+ 
+ Ashley Penney <ashley.penney@puppetlabs.com> (2):
+  * Rework for rspec3.
+  * Convert specs to RSpec 2.99.0 syntax with Transpec
+ 
+2014-06-04 Ashley Penney <ashley.penney@puppetlabs.com> - 1.2.4
+================================================================
+ Ashley Penney <ashley.penney@puppetlabs.com> (3):
+  * Add RHEL7 and Ubuntu 14.04.
+  * Prepare 1.2.4.
+  * Claim PE3.3 support.
+ 
+ Hunter Haugen <hunter@puppetlabs.com> (1):
+  * Release 1.2.4
+ 
+ Morgan Haskel <morgan@puppetlabs.com> (1):
+  * Fixing tests.
+ 
+2014-03-04 Ashley Penney <ashley.penney@puppetlabs.com> - 1.2.3
+================================================================
+ Ashley Penney <ashley.penney@puppetlabs.com> (2):
+  * Replace the symlink with the actual file to resolve a PMT issue.
+  * Prepare a 1.2.3 supported release.
+ 
+ Hunter Haugen <hunter@puppetlabs.com> (2):
+  * Add Scientific linux as a supported platform
+  * Fix the { location in metadata.json
+ 
+2014-03-03 Hunter Haugen <hunter@puppetlabs.com> - 1.2.2
+=========================================================
+ Ashley Penney <ashley.penney@puppetlabs.com> (9):
+  * Accept Java 1.6 formatted keystores for SLES tests.
+  * Gate the tests so they exclude unsupported platforms.
+  * Switch to operatingsystem instead of osfamily for finer control.
+  * Correct the wording here.
+  * Fix stderr.
+  * Prepare metadata for supported modules.
+  * Prepare supported 1.2.2 release.
+  * Ensure this works in irb.
+  * Add missing fields back to work around Puppet bug.
+ 
+ Hunter Haugen <hunter@puppetlabs.com> (2):
+  * Missing a '
+  * Adding AIX paths for java6
+ 
+ Branan Purvine-Riley <branan@puppetlabs.com> (1):
+  * Make it all work on solaris...
+ 
+ Justin Stoller <justin@puppetlabs.com> (1):
+  * Don't assume FOSS paths in java_ks tests
+ 
+ Lauren Rother <lauren.rother@puppetlabs.com> (1):
+  * Adds "Release Notes/Known Bugs" to Changelog, updates file format to
+    markdown, standardizes the format of previous entries
+ 
+2014-02-12 Hunter Haugen <hunter@puppetlabs.com> - 1.2.1
+=========================================================
+ Hunter Haugen <hunter@puppetlabs.com> (2):
+  * Allow custom gemsource
+  * Release 1.2.1
+ 
+ Ashley Penney <ashley.penney@puppetlabs.com> (1):
+  * Convert rspec-system tests to beaker.
+ 
+ Justin Stoller <justin@puppetlabs.com> (1):
+  * include puppet-lint in the Gemfile
+ 
+2013-09-18 Hunter Haugen <hunter@puppetlabs.com> - 1.2.0
+=========================================================
+ Hunter Haugen <hunter@puppetlabs.com> (5):
+  * Add rspec-system tests
+  * Clean up PKCS12 generation and testing
+  * Add system tests and documentation
+  * Validate password
+  * Release 1.2.0
+ 
+ Hunter Haugen <h.haugen@gmail.com> (3):
+  * Add 1 basic manifest test
+  * Updating specs to use first half of title as name
+  * Check that run_command is calling the correct execute method
+ 
+ Craig Brown <craig.brown@globalrelay.net> (1):
+  * Write PKCS12 keystore to temp file.
+ 
+ Owen Jacobson <owen@freshbooks.com> (1):
+  * Use newer `raise` syntax to suppress compatibility warnings.
+ 
+ cynipe <cynipe@gmail.com> (1):
+  * Add puppet:// type path support for certificate, private_key and chain
+    parameter
+ 
+2013-05-30 Adrien Thebo <git@somethingsinistral.net> - 1.1.0
+=============================================================
+ Adrien Thebo <git@somethingsinistral.net> (5):
+  * Add Gemfile for testing with travis-ci
+  * Add Rakefile the puppetlabs_spec_helper `rake spec`
+  * Supply .travis.yml configuration
+  * Add travis-ci build status to README
+  * (maint) refactor keytool provider specs
+ 
+ Raphaël Pinson <raphael.pinson@camptocamp.com> (2):
+  * Add password_file to type
+  * Add a password_file method to simplify code in import_ks
+ 
+ Ken Barber <ken@bob.sh> (1):
+  * Release 1.1.0
+ 
+2013-04-04 Matthaus Owens <mlitteken@gmail.com> - 1.0.1
+========================================================
+ fhrbek <filip.hrbek@gmail.com> (1):
+  * Support for executables outside the system default path
+ 
+2013-02-13 Matthaus Owens <mlitteken@gmail.com> - 1.0.0
+========================================================
+ Reid Vandewiele <reid@puppetlabs.com> (3):
+  * Refine general keytool provider execution method
+  * Modify tests to fit renamed run_keytool_command
+  * Update version to 1.0.0
+ 
+ Cody Herriges <c.a.herriges@gmail.com> (2):
+  * Remove deprecation notice from Puppet 3.x.
+  * Fixes all failing unit tests.
+ 
+ Jens Braeuer <jens.braeuer@commercetools.de> (2):
+  * Use "-v" in keystore -list. Java 7 will output SHA1 fingerprints by
+    default, prior it was MD5. Otherwise certificate is re-imported on every
+    Puppet run.
+  * Explicitly set random file for OpenSSL. Fails otherwise. Grrrr.
+ 
+ Lauren Rother <lauren.rother@puppetlabs.com> (1):
+  * Updated content to conform to README best practices template
+ 
+2013-01-22 Matthaus Owens <matthaus@puppetlabs.com> - 0.0.6
+============================================================
+ Reid Vandewiele <reid@puppetlabs.com> (3):
+  * Add simple workaround for empty file issue
+  * Fix Suse bug
+  * Add defined? fix for Suse
+ 
+ Matthaus Owens <matthaus@puppetlabs.com> (1):
+  * Update Modulefile for 0.0.6
+ 
+2013-01-17 Matthaus Owens <matthaus@puppetlabs.com> - 0.0.5
+============================================================
+ Matthaus Owens <matthaus@puppetlabs.com> (1):
+  * Update Modulefile for 0.0.5
+ 
+ Reid Vandewiele <reid@puppetlabs.com> (1):
+  * Work around keytool err on empty (zero-byte) file
+ 
+2013-01-16 Matthaus Owens <matthaus@puppetlabs.com> - 0.0.4
+============================================================
+ Matthaus Owens <matthaus@puppetlabs.com> (2):
+  * Add LICENSE file. Update Modulefile to use ASL instead of APL to refer to
+    the Apache License.
+  * Update Modulefile version to 0.0.4
+ 
+ Reid Vandewiele <reid@puppetlabs.com> (2):
+  * Update Modulefile release number
+  * Allow non-composite title
+ 
+2012-06-12 Cody Herriges <c.a.herriges@gmail.com> - 0.0.3
+==========================================================
+ Cody Herriges <c.a.herriges@gmail.com> (1):
+  * Adds a chain parameter to the type.
+ 
+2012-05-05 Cody Herriges <c.a.herriges@gmail.com> - 0.0.2
+==========================================================
+ Cody Herriges <c.a.herriges@gmail.com> (2):
+  * I misspelt convenience...
+  * Updating version ot 0.0.2
+ 
+2012-05-04 Cody Herriges <c.a.herriges@gmail.com> - 0.0.1
+==========================================================
+ * no changes since the previous version.

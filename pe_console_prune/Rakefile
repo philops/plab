@@ -1,0 +1,10 @@
+require 'rubygems'
+require 'puppetlabs_spec_helper/rake_tasks'
+
+task :configure_lint do
+  require 'puppet-lint'
+  # suppress 80 characters per line check
+  PuppetLint.configuration.send('disable_80chars')
+end
+
+task :lint => :configure_lint

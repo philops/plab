@@ -1,0 +1,320 @@
+#! /bin/bash
+
+#==========================================================
+# Copyright @ 2015 Puppet Labs, LLC
+# Redistribution prohibited.
+# Address: 308 SW 2nd Ave., 5th Floor Portland, OR 97204
+# Phone: (877) 575-9775
+# Email: info@puppetlabs.com
+#
+# Please refer to the LICENSE.pdf file included
+# with the Puppet Enterprise distribution
+# for licensing information.
+#==========================================================
+
+#===[ Summary ]=========================================================
+
+# This program upgrades the PE Razor Server and associated software.
+#
+# In order for this script to work, the user must have already upgraded from pe-puppet to puppet-agent.
+#
+# Steps to upgrade:
+#   - Perform preverification checks:
+#     - must be run as root
+#     - disk size
+#   - Shutdown puppet-agent and pe-razor-server
+#   - Backup the postgres database
+#   - Shutdown postgresql
+#   - Remove existing repo
+#   - Download and setup new repo (install-repo.sh.erb)
+#   - Install latest packages
+#   - Move the following files around:
+#     - /etc/puppetlabs/razor => /etc/puppetlabs/razor-server
+#     - /opt/puppet/var/razor/repo => /opt/puppetlabs/server/data/razor-server/repo-store
+#   - Migrate puppet.conf settings
+#   - Start just pe-postgresql
+#   - Restore database
+#   - Start pe-razor-server
+#   - Do puppet agent run
+#   - Start puppet
+
+#===[ Global Varables ]================================================
+
+PUPPET_BIN_DIR="/opt/puppetlabs/puppet/bin"
+OLD_PUPPET_BIN_DIR="/opt/puppet/bin"
+PG_BACKUP_DIR="/opt/puppet/var/lib/pgsql/backups_3.8.0_9.2_razor"
+NEW_RAZOR_PKG_REPO="/opt/puppetlabs/server/data/razor-server/packages/razor-repo"
+PE_TARBALL_BASE_URL="<%= @pe_tarball_base_url %>"
+NEW_PE_VERSION="<%= @new_pe_version %>"
+PLATFORM_TAG="<%= @platform_tag %>"
+#PE_TARBALL_BASE_URL="https://pm.puppetlabs.com/puppet-enterprise"
+#NEW_PE_VERSION="4.0.0-rc4-266-g775022f"
+#PLATFORM_TAG="el-7-x86_64"
+ACTIONS=()
+
+#===[ Functions ]=======================================================
+
+fail() { echo >&2 "$@"; exit 1; }
+
+# Echo back either the AIO puppet bin dir path, or PE 3.x pe-agent
+# puppet bin dir.
+puppet_bin_dir() {
+    if [ -e "${PUPPET_BIN_DIR?}" ]; then
+        t_puppet_bin_dir="${PUPPET_BIN_DIR?}"
+    else
+        t_puppet_bin_dir=/opt/puppet/bin
+    fi
+    echo "${t_puppet_bin_dir?}"
+}
+
+# Using puppet resource type, ensures a service is in the desired state
+# Arguments:
+# 1. package name
+# 2. desired state
+ensure_service() {
+    pkg=${1?}
+    state=${2?}
+    "$(puppet_bin_dir)/puppet" resource service "${pkg?}" ensure=${state?}
+    return $?
+}
+
+# Checks the filesystem for 3 times the amount of space of the current pe-razor postgres
+# database file.
+postgres_disk_check() {
+    # Disk space check
+    t_postgresql92_size=`du -s /opt/puppet/var/lib/pgsql/9.2/razor | cut -f1`
+    echo "space is $t_postgresql92_size"
+    t_required_backup_space=$(expr ${t_postgresql92_size?} \* 3)
+    echo "required is $t_required_backup_space"
+    t_free_drive_space=`df /opt/puppet/var/lib | tail -n1 | tr -s ' ' | cut -d' ' -f4`
+    echo "free space is $t_free_drive_space"
+    if ! [ ${t_free_drive_space?} -gt ${t_required_backup_space?} ]; then
+      fail  "!!! WARNING: Hard drive has insufficient space to perform the PostgreSQL upgrade. Please free at least ${t_required_backup_space?} bytes."
+    fi
+    echo "Sufficient space is available, proceeding"
+}
+
+# Backups the postgres data from the 9.2 database
+# Arguments
+# 1. Desired backup directory
+backup_postgres_data() {
+    t_pg_backup_dir="${1?}"
+    rm -rf ${t_pg_backup_dir?}
+    mkdir -p ${t_pg_backup_dir?}
+    chown pe-postgres:pe-postgres ${t_pg_backup_dir?}
+    chmod 700 ${t_pg_backup_dir?}
+    echo "Backing up your razor data to ${t_pg_backup_dir?}. This may take a few minutes."
+    su - pe-postgres -c "/opt/puppet/bin/pg_dump -f ${t_pg_backup_dir?}/razor --format=directory razor" -s /bin/bash
+    echo "Done backing up"
+}
+
+restore_postgres_data() {
+    t_pg_backup_dir="${1?}"
+    t_server_bindir="/opt/puppetlabs/server/bin"
+    echo "clear the database first"
+    su - pe-postgres -s /bin/bash -c "${t_server_bindir}/psql -c 'drop database if exists razor;'"
+    su - pe-postgres -s /bin/bash -c "${t_server_bindir}/psql -c 'create database razor;'"
+    if ! (su - pe-postgres -c "/opt/puppetlabs/server/bin/pg_restore --dbname=razor ${t_pg_backup_dir?}/razor > /dev/null" -s /bin/bash); then
+        fail "Unable to restore postgres data"
+    fi
+}
+
+# Must be root to upgrade
+fail_if_not_root() {
+    if [[ $EUID -ne 0 ]]; then
+       fail "This script must be run as root"
+    fi
+}
+
+# Downloads and setups new repo
+# Copied from install-repo.sh.erb due to not having the new paths and directories at this point
+download_install_repo() {
+    t_pe_name="puppet-enterprise-${NEW_PE_VERSION?}-${PLATFORM_TAG?}"
+    t_pe_tar_name="${t_pe_name}.<%= scope['::pe_razor::params::file_extension'] %>"
+    t_download_url="${PE_TARBALL_BASE_URL}/${NEW_PE_VERSION?}/${t_pe_tar_name}"
+    tmpdir="${NEW_RAZOR_PKG_REPO?}-$$"        # not very secure
+    trap "rm -rf '${tmpdir}'" exit
+    mkdir -p "${tmpdir}"
+
+    # OK, we need to download and unpack the archive into the destination...
+    echo "Downloading ${t_download_url}"
+    curl -Lo "${tmpdir}/${t_pe_tar_name}" "${t_download_url}"
+
+    # Now, unpack it in the same location.
+    tar xCf "${tmpdir}" "${tmpdir}/${t_pe_tar_name}"
+    rm -f "${tmpdir}/${t_pe_tar_name}"
+
+    # Finally, move that into place overwriting the destination files, but
+    # avoiding destroying additional files.  This helps with upgrades...
+    mkdir -p "${NEW_RAZOR_PKG_REPO}"
+    if ! tar cC "${tmpdir}/${t_pe_name}/packages/${PLATFORM_TAG?}" . | tar xC "${NEW_RAZOR_PKG_REPO}"; then
+        rm -rf "${NEW_RAZOR_PKG_REPO}"
+        fail "Could not extract repo archive"
+    fi
+
+    $(puppet_bin_dir)/puppet apply -e "yumrepo { 'pe-razor': baseurl =>  'file://${NEW_RAZOR_PKG_REPO}', enabled => 1, gpgcheck => 0 }"
+}
+
+# Move user config files around
+move_config_files() {
+    if [ -e /etc/puppetlabs/razor ]; then
+        mv /etc/puppetlabs/razor /etc/puppetlabs/razor-server
+    fi
+    if [ -e /opt/puppet/var/razor/repo ]; then
+        mkdir -p /opt/puppetlabs/server/data/razor-server/repo
+        mv -n /opt/puppet/var/razor/repo/* /opt/puppetlabs/server/data/razor-server/repo
+        rm -rf /opt/puppet/var/razor/repo
+    fi
+}
+
+# Migrates puppet.conf settings from 3.8 to 4.0 AIO settings
+migrate_puppet_conf() {
+    if ! ($(puppet_bin_dir)/ruby /opt/puppet/razor/upgrade/pe-code-migration.rb); then
+        echo "Updating puppet.conf settings failed."
+    fi
+}
+
+# Print actions report
+print_report() {
+    if [ ${#ACTIONS[@]} -eq 0 ]; then
+        echo "(none)"
+    else
+        printf '%s\n' "${ACTIONS[@]}"
+    fi
+}
+
+# Add action performed
+add_action() {
+    echo ${1}
+    ACTIONS+=("${1}")
+}
+
+ask() {
+    t_ask__name="${1?}"
+    t_ask__question="${2?}"
+
+    t_ask__message="?? ${t_ask__question?} [y/N] "
+    t_ask__success=n
+    t_ask__answer=n
+    until [ y = "${t_ask__success?}" ]; do
+        printf "${t_ask__message?}"
+        read -r t_ask__response
+        if [ y = "${t_ask__response?}" -o Y = "${t_ask__response?}" ]; then
+            t_ask__answer=y
+            t_ask__success=y
+        elif [ -z "${t_ask__response?}" -o n = "${t_ask__response?}" -o N = "${t_ask__response?}" ]; then
+            t_ask__answer=n
+            t_ask__success=y
+        else
+            echo 'Answer must be either "y", "n" or <ENTER> for "n"'
+        fi
+    done
+
+    eval "${t_ask__name?}='${t_ask__answer?}'"
+}
+
+# Ask for permission to perform the upgrade
+ask_perform_upgrade() {
+    ask q_install 'Stop Razor server and perform upgrade?'
+    if [ ! y = "${q_install?}" ]; then
+        echo "Exiting..."
+        exit 0
+    fi
+    echo "Continuing..."
+}
+
+puppet_agent_run() {
+    set +e
+    "$(puppet_bin_dir)/puppet" agent -t
+    if ! [[ "$?" =~ ^[0|2]$ ]]; then
+        fail "puppet agent run failed"
+    fi
+    set -e
+}
+
+#===[ Main ]============================================================
+set -u
+set -e
+
+# Preverification checks
+fail_if_not_root
+postgres_disk_check
+
+# Confirm that the user wants to upgrade
+ask_perform_upgrade
+
+trap 'echo "!!! Exception encountered. Steps performed successfully:";print_report' ERR
+
+# Stop pe-puppet and pe-razor-server before starting backup
+ensure_service pe-puppet stopped
+add_action "Puppet agent service stopped"
+ensure_service pe-razor-server stopped
+add_action "pe-razor-server stopped"
+
+# Backup postgresql
+backup_postgres_data "${PG_BACKUP_DIR?}"
+add_action "Database backed up to ${PG_BACKUP_DIR}"
+
+# Stop postgresql now that we have a backup
+ensure_service pe-postgresql stopped
+
+# Remove existing repo
+rm -rf /opt/puppet/razor/packages/razor-repo
+
+# Download and setup new repo
+download_install_repo
+add_action "New repository installed"
+
+# Upgrade pe-razor-server and pe-postgresql
+# This will need to change when we support more platforms than RPM based
+# Since we are using yum, this will also upgrade all the dependencies on the packages as well
+yum clean all --disablerepo="*" --enablerepo=pe-razor
+yum install -y puppet-agent pe-razor-server pe-postgresql pe-postgresql-server pe-postgresql-devel pe-postgresql-contrib pe-java
+add_action "pe-razor-server and pe-postgresql updated"
+
+# Move user configuration files around
+move_config_files
+add_action "Config files have been moved"
+
+# Migrate PE 3.8 puppet config to AIO Puppet
+migrate_puppet_conf
+add_action "Updated puppet.conf for new version"
+
+# Run puppet to get most up to date version of the node.
+# This is needed to create the postgres db files
+puppet_agent_run
+
+# The puppet run above will have restarted pe-razor-server, need to shut it down again
+ensure_service pe-razor-server stopped
+
+# Start pe-postgresql for data restore
+ensure_service pe-postgresql running
+
+# Restore postgres data
+restore_postgres_data "${PG_BACKUP_DIR?}"
+add_action "Razor data restored to new database version from backup"
+
+# Start pe-razor-server
+ensure_service pe-razor-server running
+add_action "pe-razor-server service started again"
+
+# Run puppet to get most up to date version of the node.
+# This is needed to create the postgres db files
+puppet_agent_run
+
+ensure_service puppet running
+add_action "puppet service started again"
+
+# Output that the upgrade was successful
+cat <<TEXT
+Upgrade successful. Steps performed:
+$(print_report)
+
+** Note: The pe-razor-client gem may need to be installed again to use the latest version
+** Note: Database backup still exists at ${PG_BACKUP_DIR}
+TEXT
+
+# ...and we should be good.
+exit 0
+
+# vim: tabstop=4:softtabstop=4:shiftwidth=4:expandtab

@@ -1,0 +1,13 @@
+{
+  "name": "puppetlabs-pe_java_ks",
+  "version": "1.2.4-37-g2d86015",
+  "author": "Puppet Labs",
+  "summary": "Manage arbitrary Java keystore files",
+  "license": "Puppet Enterprise Software License Agreement",
+  "source": "https://github.com/puppetlabs/puppetlabs-pe_java_ks",
+  "project_page": "https://github.com/puppetlabs/puppetlabs-pe_java_ks",
+  "issues_url": "https://github.com/puppetlabs/puppetlabs-pe_java_ks/issues",
+  "dependencies": [
+  
+  ]
+}

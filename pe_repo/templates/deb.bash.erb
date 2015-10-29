@@ -1,0 +1,69 @@
+#!/bin/bash -e
+
+<%= scope.function_template(["pe_repo/partials/shared_functions.bash.erb"]) %>
+
+import_gpg_key() {
+  if cmd curl; then
+    curl --tlsv1 -sk <%= @repo_base_url %>/GPG-KEY-puppetlabs | apt-key add -
+  elif cmd wget; then
+    wget --secure-protocol=TLSv1 -O - --no-check-certificate --quiet <%= @repo_base_url %>/GPG-KEY-puppetlabs | apt-key add -
+  else
+    fail "Couldn't find curl or wget; unable to continue"
+  fi
+}
+
+setup_repo() {
+  apt-get update -qq
+  apt-get install --yes apt-transport-https
+
+  # If this agent is the same platform as the master, the repo structure on the master
+  # will be different then usual due to it having all the master packages as well (for compile
+  # master installs). If it is the same platform, then we need to use the old repo style of pointing
+  # to a packages.gz file. Otherwise use the new real repo structure with arch and component.
+  # To determine that, try to curl the packages.gz from where it would be if it had the
+  # master packages in the repo
+  t_packages_gz_url="<%= @packages_url %>/Packages.gz"
+
+  if cmd curl; then
+      t_http_code="$(curl --tlsv1 -sko "/dev/null" "${t_packages_gz_url?}" --head --write-out %{http_code})"
+  elif cmd wget; then
+      t_http_code="$(wget --secure-protocol=TLSv1 -O "/dev/null" --no-check-certificate -S "${t_packages_gz_url?}" 2>&1 | awk '/HTTP\/1.1/ { printf $2 }')"
+  else
+      fail "Couldn't find curl or wget; unable to continue"
+  fi
+
+  # If we couldn't download the file, assume its the proper repo structure, otherwise
+  # use the old one
+  if [ -z "${t_http_code?}" -o "${t_http_code?}" != '200' ]; then
+      t_deb_source="<%= @packages_url %> <%= @codename %> <%= @pc_version %>"
+  else
+      t_deb_source="<%= @packages_url %> ./"
+  fi
+
+
+  mkdir -p /etc/apt/sources.list.d /etc/apt/apt.conf.d
+  echo "deb ${t_deb_source?}" > /etc/apt/sources.list.d/puppet-enterprise-installer.list
+  echo -e "Acquire::https::<%= @master %>::Verify-Peer false;\nAcquire::http::Proxy::<%= @master %> DIRECT;" > /etc/apt/apt.conf.d/90pe-repo
+  import_gpg_key
+
+  apt-get update -qq
+}
+
+
+install_agent() {
+  doing_upgrade=$(is_upgrade)
+
+  setup_repo
+
+  DEBIAN_FRONTEND=noninteractive apt-get install -y -o Apt::Get::Purge=false -o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-confdef' --no-install-recommends puppet-agent
+  if [ ! y = "${doing_upgrade}" ]; then
+    echo "START=yes" > /etc/default/puppet
+    puppet_config_set "$@"
+  fi
+
+  start_puppet_agent
+
+  ensure_agent_links
+}
+
+install_agent "$@"

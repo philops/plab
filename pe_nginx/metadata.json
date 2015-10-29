@@ -1,0 +1,14 @@
+{
+  "name": "puppetlabs-pe_nginx",
+  "version": "2015.2.0-rc0",
+  "author": "Puppet Labs",
+  "summary": "Module for manging nginx for use in Puppet Enterprise",
+  "license": "Puppet Enterprise Software License Agreement",
+  "source": "git@github.com:puppetlabs/puppetlabs-pe_nginx",
+  "project_page": "https://github.com/puppetlabs/puppetlabs-pe_nginx",
+  "issues_url": null,
+  "dependencies": [
+    {"name":"puppetlabs/pe_inifile","version_requirement":">=1.1.0 <1.2.0"}
+  ],
+  "description": "Lightweight module for managing nginx for use in the Puppet Enterprise software stack."
+}

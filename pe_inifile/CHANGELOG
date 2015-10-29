@@ -1,0 +1,265 @@
+2014-09-30 Hunter Haugen <hunter@puppetlabs.com> - 1.1.4
+=========================================================
+ Morgan Haskel <morgan@puppetlabs.com> (2):
+  * Update spec_helper for consistency.
+  * 1.1.4-prep
+ 
+ jbondpdx <jean@puppetlabs.com> (2):
+  * Docs: New inifile readme
+  * Docs: fixed code formatting
+ 
+2014-07-15 Travis Fields <cyberious@users.noreply.github.com> - 1.1.3
+======================================================================
+ Ashley Penney <ashley.penney@puppetlabs.com> (1):
+  * Prepare a 1.1.3 release.
+ 
+2014-07-09 Hunter Haugen <hunter@puppetlabs.com> - 1.1.2
+=========================================================
+ Morgan Haskel <morgan@puppetlabs.com> (1):
+  * 1.1.2-prep.
+ 
+2014-07-07 Ashley Penney <ashley.penney@puppetlabs.com> - 1.1.1
+================================================================
+ Colleen Murphy <colleen@puppetlabs.com> (6):
+  * Add configuration file for modulesync
+  * Sync files
+  * Update .sync.yml to support new .travis.yml configs
+  * Synchronize .travis.yml
+  * Update Gemfile for .travis.yml defaults
+  * Add validate and lint tasks to travis script
+ 
+ Pete Johns <pete.johns@envato.com> (5):
+  * `be_true` and `be_false` are deprecated
+  * Failing spec to describe my problem
+  * Handle quotation marks in section names
+  * Test allowing $ signs in section names
+  * Spec for MODULES-1194
+ 
+ Morgan Haskel <morgan@puppetlabs.com> (3):
+  * Require beaker-rspec >= 2.2
+  * OSX doesn't support the -e flag to echo.
+  * Remove the Modulefile, use metadata.json.
+ 
+ Ashley Penney <ashley.penney@puppetlabs.com> (1):
+  * Pin rspec to 2.x.
+ 
+ Hunter Haugen <hunter@puppetlabs.com> (1):
+  * Release 1.1.1
+ 
+ Travis Fields <travis@puppetlabs.com> (1):
+  * Add windows support and testing nodesets
+ 
+2014-06-04 Morgan Haskel <morgan@puppetlabs.com> - 1.1.0
+=========================================================
+ Ashley Penney <ashley.penney@puppetlabs.com> (3):
+  * Add RHEL7 and Ubuntu 14.04 support.
+  * Quick typo fix.
+  * Prepare a 1.1.x release.
+ 
+ Hunter Haugen <hunter@puppetlabs.com> (2):
+  * Remove stderr checks because of deprecations
+  * Release 1.1.0
+ 
+ Michal Růžička <michal.ruza@gmail.com> (2):
+  * Add quote_char parameter to the ini_subsetting resource type
+  * Tests for the quote_char parameter.
+ 
+ Igor Galić <i.galic@brainsware.org> (1):
+  * be more igorant
+ 
+ Morgan Haskel <morgan@puppetlabs.com> (1):
+  * Update PE version requirement.
+ 
+2014-06-04 Morgan Haskel <morgan@puppetlabs.com> - 1.0.4
+=========================================================
+ Ashley Penney <ashley.penney@puppetlabs.com> (1):
+  * Claim PE3.3 support.
+ 
+ Hunter Haugen <hunter@puppetlabs.com> (1):
+  * Version 1.0.4
+ 
+2014-03-03 Hunter Haugen <hunter@puppetlabs.com> - 1.0.3
+=========================================================
+ Hunter Haugen <hunter@puppetlabs.com> (8):
+  * Remove travis autopublish stuff
+  * Add supported OS/PE/Puppet
+  * Fix missing comma in metadata.json
+  * AIX exits with 2 on file doesn't exist.
+  * Release 1.0.2
+  * Avoid multi-line grep on Solaris 10
+  * Correct syntax
+  * It is actually all solaris
+ 
+ Ashley Penney <ashley.penney@puppetlabs.com> (4):
+  * Convert to using .tmpdir instead of a hardcoded /tmp, so this works on
+    Windows too.
+  * Add AIX and remove fields copied from Modulefile.
+  * Prepare supported module 1.0.3.
+  * Add missing fields back to work around Puppet bug.
+ 
+ Justin Stoller <justin@puppetlabs.com> (1):
+  * Remove basic spec
+ 
+ Lauren Rother <lauren.rother@puppetlabs.com> (1):
+  * Adds "Release Notes/Known Bugs" to Changelog, updates file format to
+    markdown, standardizes the format of previous entries
+ 
+2014-02-12 Ashley Penney <ashley.penney@puppetlabs.com> - 1.0.1
+================================================================
+ Garrett Honeycutt <code@garretthoneycutt.com> (3):
+  * Enable fast finish in Travis
+  * Test against Puppet v3.4
+  * Fix link to travis in README
+ 
+ Hunter Haugen <hunter@puppetlabs.com> (3):
+  * (FM-161) Add beaker tests for parameter coverage
+  * Allow custom gemsource
+  * Release 1.0.1
+ 
+ Rob Braden <bradejr@puppetlabs.com> (3):
+  * Update settings regexes to support settings with "[", "]" in them
+  * Add tests to cover settings with square brackets and quotes in the name
+  * Fix the regex t fix a bad match
+ 
+ Ashley Penney <ashley.penney@puppetlabs.com> (2):
+  * FM-103: Add metadata.json to all modules.
+  * Add empty dependencies section.
+ 
+ Anthony Roy <anthony.roy@williamhill.com> (1):
+  * Adding whitespace capability to section header regex
+ 
+ Jesse Newland <jesse@github.com> (1):
+  * support spaces in sections
+ 
+ Johan Haals <johan.haals@gmail.com> (1):
+  * make ensure => present the first attribute
+ 
+2013-07-16 Ashley Penney <ashley.penney@puppetlabs.com> - 1.0.0
+================================================================
+ Chris Price <chris@puppetlabs.com> (9):
+  * Added license file w/Apache 2.0 license
+  * Update Modulefile and Changelog, prepping for 0.10.0 release
+  * Update README.markdown
+  * Change constants to class variables
+  * Update Modulefile and CHANGELOG for 0.10.1 release
+  * Better handling of quotes for subsettings
+  * Update Modulefile and Changelog for 0.10.2 release
+  * Fix bug in subsetting handling for new settings
+  * Update CHANGELOG and Modulefile for 0.10.3 release
+ 
+ Richard Clamp <richardc@unixbeard.net> (7):
+  * add a type to test inheriting from ini_setting
+  * add a test for creating subclassed instances
+  * Fix the sample usage in the README
+  * actually write a file in spec/fixtures/tmp
+  * allow for the namevar construction
+  * fix syntax for 1.8.7
+  * .instances isn't stable between puppet versions
+ 
+ Ashley Penney <ashley.penney@puppetlabs.com> (6):
+  * Tweak the Gemfile to be better for development, add a Rakefile.
+  * support for whitespaces in settings names (need for smb.conf)
+  * Test only against the versions we want.
+  * Prepare a 1.0.0 release.
+  * Add autopublishing details.
+  * Fix this to the right key, after adding appropriate --repo and --org
+    options to travis.
+ 
+ Dan Bode <dan@puppetlabs.com> (4):
+  * Add purging support to ini file
+  * guard against nil indentation values
+  * fix unit test failures
+  * Add travisfile and Gemfile
+ 
+ Erik Dalén <dalen@spotify.com> (1):
+  * Style fixes
+ 
+ James Sweeny <james.sweeny@puppetlabs.com> (1):
+  * Fix test to use correct key_val_parameter
+ 
+ Karel Brezina <karel.brezina@gmail.com> (1):
+  * Added 'ini_subsetting' custom resource type
+ 
+ Terry Wilson <twilson@redhat.com> (1):
+  * Allow empty values
+ 
+2012-11-02 Chris Price <chris@puppetlabs.com> - 0.9.0
+======================================================
+ * no changes since the previous version.2013-05-28 Chris Price <chris@puppetlabs.com> - 0.10.3
+=======================================================
+ Chris Price <chris@puppetlabs.com> (2):
+  * Fix bug in subsetting handling for new settings
+  * Update CHANGELOG and Modulefile for 0.10.3 release
+ 
+2013-05-22 Chris Price <chris@puppetlabs.com> - 0.10.2
+=======================================================
+ Chris Price <chris@puppetlabs.com> (2):
+  * Better handling of quotes for subsettings
+  * Update Modulefile and Changelog for 0.10.2 release
+ 
+2013-05-21 Chris Price <chris@puppetlabs.com> - 0.10.1
+=======================================================
+ Chris Price <chris@puppetlabs.com> (3):
+  * Update README.markdown
+  * Change constants to class variables
+  * Update Modulefile and CHANGELOG for 0.10.1 release
+ 
+ Dan Bode <dan@puppetlabs.com> (1):
+  * Add travisfile and Gemfile
+ 
+ Erik Dalén <dalen@spotify.com> (1):
+  * Style fixes
+ 
+2013-04-02 Chris Price <chris@puppetlabs.com> - 0.10.0
+=======================================================
+ Chris Price <chris@puppetlabs.com> (9):
+  * Minor tweaks to handling of removing settings
+  * Respect indentation / spacing for existing sections and settings
+  * Better handling of whitespace lines at ends of sections
+  * Add example for `ensure=absent`
+  * Refactor to clarify implementation of `save`
+  * Add detection for commented versions of settings
+  * Update Modulefile/CHANGELOG ; final commit for v0.9.0 release
+  * Added license file w/Apache 2.0 license
+  * Update Modulefile and Changelog, prepping for 0.10.0 release
+ 
+ Dan Bode <dan@puppetlabs.com> (6):
+  * Make ruby provider a better parent.
+  * Make value a property
+  * Add support for removing lines
+  * Add purging support to ini file
+  * guard against nil indentation values
+  * fix unit test failures
+ 
+ James Sweeny <james.sweeny@puppetlabs.com> (1):
+  * Fix test to use correct key_val_parameter
+ 
+ Karel Brezina <karel.brezina@gmail.com> (1):
+  * Added 'ini_subsetting' custom resource type
+ 
+ Reid Vandewiele <reid@puppetlabs.com> (1):
+  * Allow values with spaces to be parsed and set
+ 
+2012-09-24 Chris Price <chris@puppetlabs.com> - 0.0.3
+======================================================
+ Chris Price <chris@puppetlabs.com> (3):
+  * Allow overriding separator string between key/val pairs
+  * Add validation for key_val_separator
+  * Updated CHANGELOG and Modulefile; final commit for 0.0.3 release
+ 
+ Joe Topjian <joe@topjian.net> (3):
+  * Added support for colons in section names
+  * Fixed spec_helper.rb so original tests can pass.
+  * Added tests for sections with colons
+ 
+2012-08-20 Chris Price <chris@puppetlabs.com> - 0.0.2
+======================================================
+ Chris Price <chris@puppetlabs.com> (1):
+  * Add CHANGELOG and update README; final commit for 0.0.2 release
+ 
+ Chris Price <chris@pupppetlabs.com> (1):
+  * Add support for "global" section at beginning of file
+ 
+2012-08-16 Chris Price <chris@pupppetlabs.com> - 0.0.1
+=======================================================
+ * no changes since the previous version.

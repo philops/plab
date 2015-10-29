@@ -1,0 +1,50 @@
+{
+  "name": "puppetlabs-pe_razor",
+  "version": "0.2.1-78-g2e288a3",
+  "author": "Puppet Labs",
+  "summary": "PE Razor puppet module",
+  "license": "PE Commercial License",
+  "source": "git://github.com/puppetlabs/puppetlabs-pe_razor.git",
+  "project_page": "http://github.com/puppetlabs/puppetlabs-pe_razor",
+  "issues_url": "https://github.com/puppetlabs/puppetlabs-pe_razor/issues",
+  "dependencies": [
+    {"name":"puppetlabs/pe_java_ks","version_requirement":">= 1.2.3"}
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "6"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "6"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "6"
+      ]
+    },
+    {
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease": [
+        "6"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": ">= 3.2.0 < 3.4.0"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ],
+  "description": "PE Razor provisioning system puppet installation module"
+}

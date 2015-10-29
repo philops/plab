@@ -1,0 +1,23 @@
+#!/bin/bash -e
+
+<%= scope.function_template(["pe_repo/partials/shared_functions.bash.erb"]) %>
+
+install_agent() {
+  doing_upgrade=$(is_upgrade)
+
+  cat <<REPO > /etc/yum.repos.d/pe_repo.repo
+<%= scope.function_template(["pe_repo/el.repo.erb"]) %>
+REPO
+
+  yum clean all --disablerepo="*" --enablerepo=pe_repo
+  yum install -y puppet-agent
+
+  if [ ! y = "${doing_upgrade}" ]; then
+    puppet_config_set "$@"
+    start_puppet_agent
+  fi
+
+  ensure_agent_links
+}
+
+install_agent "$@"

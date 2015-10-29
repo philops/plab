@@ -1,0 +1,13 @@
+{
+  "name": "puppetlabs-pe_inifile",
+  "version": "1.1.4-16-gcb39966",
+  "author": "Puppet Labs",
+  "summary": "Resource types for managing settings in INI files",
+  "license": "Puppet Enterprise Software License Agreement",
+  "source": "https://github.com/puppetlabs/puppetlabs-pe_inifile",
+  "project_page": "https://github.com/puppetlabs/puppetlabs-pe_inifile",
+  "issues_url": "https://github.com/puppetlabs/puppetlabs-pe_inifile/issues",
+  "dependencies": [
+  
+  ]
+}

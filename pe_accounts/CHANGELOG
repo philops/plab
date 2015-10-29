@@ -1,0 +1,161 @@
+2011-10-18 Matthaus Litteken <matthaus@puppetlabs.com> - v1.0.2
+================================================================
+ Cody Herriges <c.a.herriges@gmail.com> (2):
+  * (#9993) PE module to have a prefix of "pe_"
+  * (#9993) PE module to have a prefix of "pe_"
+ 
+ Matthaus Litteken <matthaus@puppetlabs.com> (1):
+  * Bumping version to v1.0.2
+ 
+2011-10-18 Matthaus Litteken <matthaus@puppetlabs.com> - v1.0.1
+================================================================
+ Deepak Giridharagopal <deepak@puppetlabs.com> (1):
+  * (#9445) Remove incomplete support for default parameters
+ 
+ Jeff McCune <jeff@puppetlabs.com> (1):
+  * Fixup incorrect accounts::user data_namespace documentation
+ 
+ Matthaus Litteken <matthaus@puppetlabs.com> (1):
+  * Updating changelog for v1.0.1.
+ 
+ Nigel Kersten <nigel@puppetlabs.com> (1):
+  * Update Modulefile for 1.0.1 release
+ 
+2011-08-08 Jeff McCune <jeff@puppetlabs.com> - v1.0.0
+======================================================
+ Jeff McCune <jeff@puppetlabs.com> (37):
+  * (#8575) Add example data structure in puppet doc
+  * (#8575) Add YAML data file support
+  * (#8575) Add example YAML data files
+  * (#8577) Support multiple ssh keys per user
+  * (#8577) Add multiple SSH key example
+  * (#8583) Add lockout feature to accounts module
+  * (#8583) Add example locked account
+  * (#8583) Add lock information to the README
+  * (#8582) Add base bash rc and profile from EL 5
+  * (#8582) Add basic bash Puppet customizations
+  * (#8582) Update README with shell customization info
+  * (#8583) Fix invalid shell on solaris
+  * (#8582) Fix missing primary group
+  * (#8579) Add example of system account management
+  * (#8588) Update README for release and PE manual
+  * (#8678) Update example YAML data with user_params key
+  * (#8678) Add relation edge from ~/.ssh to authorized_keys
+  * (#8678) Fix lockout shell on Solaris
+  * (#8678) Always manage authorized_keys file permissions
+  * (#8678) Fix accounts::user user hash default lookup
+  * (#8679) Add end-user accounts:user resource example
+  * (#8679) Update README with accounts::user information
+  * (#8678) Refactor accounts::user removing hash use
+  * (#8678) Remove user_params hash from example data
+  * (#8678) Manage no users and groups by default
+  * (#8678) Get data from Puppet DSL namespace by default
+  * (#8679) Mention accounts::user first in the README
+  * (#8678) Remove use of create_resources hash in accounts::user
+  * (#8678) Fix validation API mismatch with stdlib module
+  * (#8794) Rename whole_line to file_line in accounts class
+  * (#8578) Do not manage sudoers by default
+  * (#8718) Add test coverage for anchor resources
+  * (#8829) Update README files for 1.0.0 release
+  * (#8829) Update FIXME tags in module
+  * (#8829) Update Modulefile for 1.0.0 release
+  * (#8829) Update LICENSE as per PE SLA
+  * (#8829) Update CHANGELOG for 1.0.0 release
+ 
+ Dan Bode <dan@puppetlabs.com> (10):
+  * (#8604) Pre-load create_resources function
+  * (#8578) Add sudo configuration to accounts
+  * (#8649) Do not manage sudoers on Solaris
+  * (#8678) Update data manifest for new format
+  * (#8678) Refactor user creation to use define
+  * (#8678) update accounts class
+  * (#8678) use namespace as datastore
+  * (#8724) Decouple accounts::user from accounts
+  * (8718) Add unit tests for accounts::user
+  * (8791) Update append_line to whole_line.
+ 
+2011-06-23 Jeff McCune <jeff@puppetlabs.com> - v0.0.3
+======================================================
+ Jeff McCune <jeff@puppetlabs.com> (11):
+  * Comment only change about ruby idiom
+  * (#8010) Add basic home directory management
+  * (#8010) Whitespace only change
+  * (#8010) Fill in user defined $users_hash_default
+  * (#8010) Pull the user defined $users_hash_default
+  * (#8010) Add merging with the default hash
+  * (#8010) Add ssh key management support
+  * (#8010) Only interpolate the home directory param
+  * (#8010) Always manage authorized_keys
+  * (#8010) Comment only cleanup of fixed FIXME's
+  * Update CHANGELOG for 0.0.3 MVP Release
+ 
+2011-06-23 Jeff McCune <jeff@puppetlabs.com> - v0.0.2
+======================================================
+ Jeff McCune <jeff@puppetlabs.com> (19):
+  * (#8010) Add basic structure for group management
+  * (#8010) Add basic accounts::data class
+  * (#8010) Add create_resources function
+  * (#8010) Add basic group management using create_resources()
+  * (#8010) Documentation only update to data module
+  * (#8032) Add create_resources from 2.7.x 4905956
+  * (#8032) Whitespace / Documentation only change
+  * (#8032) Contain resources declared with create_resources
+  * (#8010) Fixup wrong variable in groups
+  * Add FIXME comments for future work.
+  * (#8010) Add basic user management
+  * (#8010) Work around metaparameter and arrow issue
+  * WIP Remove data not directly usable by the type
+  * (#8010) Add basic user and primary group management
+  * (#8010) Limit group names to 8 characters
+  * (#8010) Documentation only update
+  * (#8010) Lookup variable with fully qualified namespace
+  * (#8010) Whitespace only change
+  * Update CHANGELOG for 0.0.2 release
+ 
+2011-06-21 Jeff McCune <jeff@puppetlabs.com> - v0.0.1
+======================================================
+ * no changes since the previous version.2014-02-19 Nick Lewis <nick@puppetlabs.com> - 2.0.1
+====================================================
+ Eric Williamson <eric.williamson@puppetlabs.com> (1):
+  * (PE-2718) Dynamically generate the module version
+ 
+ Jeff Weiss <jeff.weiss@puppetlabs.com> (1):
+  * (PE-475) Make module deps more accurate
+ 
+2013-04-26 Matthaus Owens <matthaus@puppetlabs.com> - 2.0.0
+============================================================
+ Charles Dunbar <cdunbar@puppetlabs.com> (1):
+  * (#17373) Removed duplicate function from module\n Function was needed in
+    2.6 masters for support, now built in 2.7 and later.
+ 
+ Matthaus Owens <matthaus@puppetlabs.com> (1):
+  * (packaging) Update Modulefile, CHANGELOG for 2.0.0 release
+ 
+2012-09-13 Matthaus Litteken <matthaus@puppetlabs.com> - 1.1.0
+===============================================================
+ Lindsey <lindsey@puppetlabs.com> (3):
+  * add tests for most of the changed behaviour when removing accounts
+  * add tests for resource relationship differences in adding/removing users
+  * add basic acceptance tests
+ 
+ Matthaus Litteken <matthaus@puppetlabs.com> (1):
+  * Updating CHANGELOG, Modulefile for 1.1.0 release
+ 
+ Nigel Kersten <nigel@explanatorygap.net> (1):
+  * Implement ensure=>absent for user accounts and default to cleaning up
+    homedir
+ 
+ nfagerlund <nick.fagerlund@gmail.com> (1):
+  * Fix typo in create_resources function's description string
+ 
+2012-04-27 Moses Mendoza <moses@puppetlabs.com> - 1.0.4
+========================================================
+ Matthaus Litteken <matthaus@puppetlabs.com> (1):
+  * Update create_resources.rb to latest from 2.7.x
+ 
+ Moses Mendoza <moses@puppetlabs.com> (1):
+  * Update CHANGELOG Modulefile for 1.0.4 release
+ 
+2012-03-12 Jeff McCune <jeff@puppetlabs.com> - 1.0.3
+=====================================================
+ * no changes since the previous version.

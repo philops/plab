@@ -1,0 +1,672 @@
+2014-09-29 Brian Cain <brianccain@gmail.com> - 3.4.3
+=====================================================
+ Ashley Penney <ashley.penney@puppetlabs.com> (62):
+  * Fix license file.
+  * Prepare 3.0.0 release.
+  * FM-103: Add metadata.json to all modules.
+  * Prepare 3.0.0-rc2 release.
+  * Prepare 3.0.0-rc3 release.
+  * Prepare 3.0.0 release.
+  * Add autopublishing.
+  * Prepare a 3.2.0 release.
+  * (FM-486) Fix deprecated Puppet::Util::SUIDManager.run_and_capture
+  * Convert rspec-system tests over to beaker.
+  * Prepare a 3.3.0 release.
+  * This fixes this test to work in the face of oppressive SELinux!
+  * This fixes this test to work in the face of oppressive SELinux!
+  * Switch to a regex match to ignore \n's.
+  * Ensure we call out the locales-all requirement.
+  * Fix the locale generation for Debian.
+  * Use the correct encoding.
+  * Prepare metadata for supported modules release.
+  * Replace the symlink with the actual file to resolve a PMT issue.
+  * Prepare 3.3.3 supported release.
+  * Fix for Ubuntu 14.04.
+  * Wrap this in a test for PE.
+  * This is already set in config.pp and so we need to pick a unique name.
+  * Move into the hosts loop.
+  * Fixes to get the tests running on Ubuntu 14.04.
+  * Add `service_ensure`.
+  * Update for RHEL7.
+  * This doesn't exist on RHEL7.
+  * Handle ports for systemd.
+  * Ensure repo is in place before postgis installation.
+  * Ensure we've always started postgresql at least once before a reload.
+  * Add the template for port overriding on RHEL7.
+  * Various test updates to handle RHEL7 better.
+  * Make sure we set selinux contexts on Redhat.
+  * Make sure we continue working post 7.0.
+  * Switch to 'running'/'stopped' to match the test below.
+  * Stop postgresql before changing port.
+  * Various fixes to the tests.
+  * Allow psql to fail as it sometimes will in the tests.
+  * Fix the way we remove postgresql::client.
+  * Fix tests on Centos.
+  * Add an entry for RHEL5.
+  * Make sure that the location for 12.04 is set.
+  * Fix rspec-beaker for now.
+  * Fix RHEL5 service stopping.
+  * Return Gemfile back to stock.
+  * Fixes broken tests and add a service_ensure test.
+  * Restructure the tests here to be cleaner.
+  * Fix service_ensure.
+  * See if this fixes puppet 2.7.
+  * Fix postgis so it installs the approprate RHEL5 package.
+  * Add RHEL7 and Ubuntu 14.04.
+  * Prepare a 3.4.0 release.
+  * Merge pull request #433 from apenney/fix-selinux-tests
+  * So long, Modulefile!
+  * Merge pull request #436 from apenney/fix-typo
+  * Remove postgis support for now.
+  * Reword the postgis unsupported information.
+  * Prepare a 3.4.1 release.
+  * Make sure this works on Fedora as well as RHEL7.
+  * Prepare 3.4.2 release.
+  * Prepare a 3.4.3 release.
+ 
+ Ken Barber <ken@bob.sh> (27):
+  * Major rewrite to solve order dependencies and unclear public API
+  * Add datadir back, as its used within a lot of tests
+  * Fix debian 7 regexp, rename to default_version and some cleanup
+  * Include firewall class in firewall based test
+  * Provide package removal fixes for Debian tests
+  * Modify tests for postgresql::server to test for purged state
+  * Fix repo removal for testing purposes
+  * Calculate default version for Fedora
+  * Skip firewall tests for Fedora
+  * Fix selinux permissions for fedora tests
+  * Correct some more failing tests
+  * Add switch for service_name that works for centos
+  * Various cleanups
+  * Fix table_grant tests
+  * Make sure $ensure is passed through to repo correctly
+  * serverspec + some cleanup
+  * Fix encoding issues for ubuntu
+  * Ensure proper removal of the client package
+  * Ensure we use port 5432 for postgresql
+  * Rename contrib to server::contrib
+  * (GH-198) Fix race condition on postgresql startup
+  * Remove concat::setup for include
+  * postgresql not puppetdb
+  * Provide a greater timeout for slower systems
+  * Use main psql path and cleanup old packages properly
+  * Release 3.1.0
+  * Fix lsbmajdistreleasee fact for Ubuntu
+ 
+ Hunter Haugen <hunter@puppetlabs.com> (13):
+  * Allow custom gemsource
+  * Release 3.3.1
+  * Missing lsbdistid stub for apt module
+  * Add unsupported platforms
+  * Missed these
+  * Add class apt for manage_package_repo => true
+  * Correct spec helper commands
+  * Supported Release 3.3.2
+  * Patch metadata
+  * Remove autorelease
+  * (MODULES-630) Deprecate postgresql::server::version
+  * Log output on failures
+  * Clean the yum cache before adding repo
+ 
+ Mickaël Canévet <mickael.canevet@camptocamp.com> (8):
+  * Add a parameter to (un)manage pg_hba.conf
+  * Fix table_grant_spec to show a bug
+  * Can pass template at database creation
+  * Fix granting all privileges on a table
+  * Add missing privileges
+  * Fix unit tests with rspec-puppet 1.0
+  * Add strict_variables support in unit tests
+  * Fix strict_variables issues
+ 
+ Morgan Haskel <morgan@puppetlabs.com> (8):
+  * Fix validate_db_connection_spec.
+  * '!' binds before 'and'.
+  * If we're just testing for a warning no need to start up the services.
+  * Need to flush iptables on rhel5.
+  * Update PE version requirement.
+  * Merge pull request #424 from apenney/remove-eq-tests
+  * Pin to rspec to 2.x.
+  * Merge pull request #427 from apenney/fix-1404-tests
+ 
+ Reid Vandewiele <reid@puppetlabs.com> (5):
+  * Allow specification of default database name
+  * Add globals/params layering for default_database
+  * Use default_database in validate_db_connection
+  * Fix postgresql_conf quote logic
+  * Add tests
+ 
+ Brandon High <brandon.high@puppetlabs.com> (4):
+  * (PE-5039) Add docs to README
+  * (PE-5039) Namespace postgresql to pe_postgresql
+  * (PE-5039) Namespace module functions to PE
+  * (PE-5039) Use pe_concat
+ 
+ Brian Almeida <bma@thunderkeys.net> (4):
+  * Add support to postgresql::server::role for INHERIT/NOINHERIT
+  * Add documentation on inherit parameter to README.md
+  * Add spec/acceptance test for inherit option to postgresql::server::role
+  * Add support for port parameter to postgresql::server, fix underlying
+    assumptions that port=5432
+ 
+ Geoff Garside <geoff@geoffgarside.co.uk> (4):
+  * Move params::{user,group} to be set under osfamily
+  * Update FreeBSD $confdir to defer to $datadir
+  * Change validate_postgresql_connection.sh exec PATH
+  * Replace psql_db => $user with $default_database.
+ 
+ Joshua Hoblitt <jhoblitt@cpan.org> (4):
+  * peg rspec-puppet gem version < 1
+  * update rspec-puppet tests to use contain_class() instead of
+    include_class()
+  * use Puppet::Util::Execute.execute with puppet >= 3.4
+  * change pg_hba.conf to be owned by postgres user account
+ 
+ Kamil Szymanski <kamil.szymanski.dev@gmail.com> (4):
+  * lint fixes
+  * Validate authentication method against server version
+  * Add default PostgreSQL version for Ubuntu 13.10
+  * Add default PostgreSQL version for Ubuntu 14.04
+ 
+ Bret Comnes <bcomnes@gmail.com> (3):
+  * Special case for $datadir on Amazon
+  * Defined $default_version for Fedora 17
+  * Added newline at end of file
+ 
+ Dejan Golja <dejan@golja.org> (3):
+  * Added missing depedenncy '->' in the Class: postgresql::globals usage
+    example
+  * Misspelled class postgresql::globals (missing ending 's' in some cases)
+  * Missing service_provider description and wrong service_name description
+    for postgresql::globals class
+ 
+ Jeremy Kitchen <kitchen@kitchen.io> (3):
+  * periods are valid in configuration variables also
+  * test and fix for dots breaking config keys
+  * add support for postgis
+ 
+ Tom McLaughlin <tmclaughlin@hubspot.com> (3):
+  * Exec['postgresql_initdb'] needs to be done after $datadir exists
+  * Should have had cofee before doing this commit...
+  * Prevent float of defined resource.
+ 
+ Garrett Honeycutt <code@garretthoneycutt.com> (2):
+  * Enable fast finish in Travis
+  * Test against Puppet v3.4.0
+ 
+ Igor Galić <i.galic@brainsware.org> (2):
+  * use fully-qualified path to psql to set password
+  * Fixed travis by updating Gemfile to pin Rake to 10.1.1
+ 
+ Lauren Rother <lauren.rother@puppetlabs.com> (2):
+  * Adds "Release Notes/Known Bugs" to Changelog, updates file format to
+    markdown, standardizes the format of previous entries
+  * Add install instructions for supported module version
+ 
+ Marco Nenciarini <marco.nenciarini@2ndquadrant.it> (2):
+  * Support apt.postgresql.org version specific packages.
+  * Add support to custom xlogdir parameter
+ 
+ Marek Hulan <mhulan@redhat.com> (2):
+  * Expose owner in db definition
+  * Tests for owner param
+ 
+ Rahul Gopinath <rahul@puppetlabs.com> (2):
+  * Pulling in pgconf module from camptocamp/puppet-pgconf
+  * Adding anchors around contained resources
+ 
+ aadamovich <andrey@aestasit.com> (2):
+  * Wrong parameter name: manage_pg_conf -> manage_pg_hba_conf
+  * $postgresql::server::client_package_name is referred from install.pp, but
+    is not defined in server.pp
+ 
+ cdenneen <cdenneen@gmail.com> (2):
+  * Update server.pp
+  * fixed typo
+ 
+ Aaron Blew <aaron.blew@iovation.com> (1):
+  * Added xlogdir test to basic install/db creation validation test. Updated
+    README
+ 
+ Axel Bock <axel.bock@dvag.com> (1):
+  * fix for concat error
+ 
+ Björn Häuser <b.haeuser@rebuy.de> (1):
+  * Fix how to run the acceptance tests
+ 
+ Brandon Wamboldt <brandon.wamboldt@gmail.com> (1):
+  * Fix NOREPLICATION option for Postgres 9.1
+ 
+ Casey Feskens <cfeskens@willamette.edu> (1):
+  * Add class postgresql::lib::perl for perl support
+ 
+ David Wikmans <david.wikmans@svenskaspel.se> (1):
+  * Spelling and redundancy fix in README
+ 
+ Gerrard Geldenhuis <gerrard@puppetlabs.com> (1):
+  * Fixing small typos
+ 
+ Greg Sutcliffe <gsutclif@redhat.com> (1):
+  * Remove trailing comma which breaks 2.6 compat
+ 
+ Jarl Stefansson <jarl.stefansson@gmail.com> (1):
+  * Add zero length string to join() function
+ 
+ Jeremy Kitchen <jeremy@nationbuilder.com> (1):
+  * add search_path attribute to postgresql_psql resource
+ 
+ Justin Stoller <justin.stoller@gmail.com> (1):
+  * This corrects the location of the pg_hba config file on debian oses in
+    tests
+ 
+ Justin Stoller <justin@puppetlabs.com> (1):
+  * remove trailing whitespace
+ 
+ Magnus Hagander <magnus@hagander.net> (1):
+  * Fix typo, clearly from a copy/paste mistake
+ 
+ Marc Huffnagle <marc@huffnagle.net> (1):
+  * Updated the URLs in the .fixtures.yml file to use https
+ 
+ Matthias Viehweger <kronn@kronn.de> (1):
+  * Remove deprecated and unused parameters to concat::fragment
+ 
+ Michal Růžička <michal.ruza@gmail.com> (1):
+  * (PE-3582) backport pe_postgresql_conf resource type
+ 
+ Neil Northrop <nnorthrop@gmail.com> (1):
+  * fixed the rspec test to include 'sha1' in
+ 
+ Nick Lewis <nick@puppetlabs.com> (1):
+  * (PE-2213) Allow access from all hosts over IPv6
+ 
+ Niels Abspoel <aboe76@gmail.com> (1):
+  * Added Archlinux Support
+ 
+ Pieter Lexis <pieter@kumina.nl> (1):
+  * Allow the ex- and import of postgresql::server::db
+ 
+ Simon Séhier <simon.sehier@camptocamp.com> (1):
+  * Convert rspec-sytem to acceptance for postgis
+ 
+ Zach Leslie <zach@puppetlabs.com> (1):
+  * (feat) Add FreeBSD Support
+ 
+ duritong <peter.meier+github@immerda.ch> (1):
+  * Fix documentation about username/password for the postgresql_hash
+    function
+ 
+ irconan <richard@connon.me.uk> (1):
+  * Update README.md
+ 
+ jonoterc <jon_obuchowski@terc.edu> (1):
+  * enabling defined postgres user password without resetting on every puppet
+    run (based on
+    https://github.com/puppetlabs/puppetlabs-postgresql/issues/92)
+ 
+ leehanel <lee.hanel@gmail.com> (1):
+  * add lc_* config entry settings
+ 
+2014-02-19 Nick Lewis <nick@puppetlabs.com> - 1.0.3
+====================================================
+ Chris Price <chris@puppetlabs.com> (47):
+  * Moved files up to root directory
+  * Working version of postgresql::server
+  * Improve configuration for initial postgres install
+  * Bring database, database_user, and database_grant into alignment with
+    mysql module
+  * Add postgresql::db convenience type, improve security
+  * Fix for debian 6 service name
+  * Try to make the pg_hba.conf work on postgres 8.1
+  * Update Vagrant tests to be compatible with new structure
+  * Update Modulefile to reflect latest dependencies
+  * Add a type for validating a postgres connection
+  * Add changelog
+  * Give the persist-firewall Exec a more explicit name
+  * Update README.md
+  * Framework for testing on Cent6 / PG9
+  * Refactor tests and add CentOS6 image
+  * A bit more refactoring of test context code
+  * A little more framework for CentOS pg9 testing
+  * Fix paths
+  * Fix paths
+  * Working on getting ubuntu specs passing again
+  * Merge ::paths and ::packages into one class, called ::platform.
+  * A few minor fixes to get tests passing again
+  * Re-add support for managing yumrepo
+  * Merge platform.pp back into params.pp
+  * Cleanup and move control of version into params
+  * Fix to 'require' for database_grant
+  * Rework `postgres_default_version` fact
+  * Fix GPG key for yum.postgresl.org
+  * Add remaining params to init.pp, and update tests
+  * Update uses of 'postgresql' to 'postgresql::client'
+  * Clean up docs for base class (init.pp)
+  * Fix merge issue from AMZ linux patch
+  * Fix error message in default version fact
+  * Update stdlib dependency to reflect semantic versioning
+  * Add a "require" to make sure the service is up before trying to create a
+    db
+  * Update CHANGELOG, README, Modulefile for 2.0.0 release
+  * Fix revoke command in database.pp to support postgres 8.1
+  * Update spec/README.md
+  * Final commit for 2.0.1 release; update CHANGELOG and Modulefile
+  * WIP
+  * WIP - adding support for an 'included' config file
+  * Fix example command in README for running system tests on a distro
+  * Add a few more docs about running system tests
+  * Add support for other operating systems besides Redhat/Debian
+  * Don't hard-code postgres user's username for pg_hba
+  * Update docs to reflect new `owner` parameter for `::database` type.
+  * Update Modulefile and Changelog for 2.3.0 release
+ 
+ Ken Barber <ken@bob.sh> (27):
+  * Fix inherits issue with validate_db_connection
+  * Manage official postgres apt repo
+  * Fix examples for specifying usage of official postgresql repos
+  * Add unit tests and travis-ci support
+  * Add locale parameter support
+  * Provide new defined resources for managing pg_hba.conf
+  * Do not run the reload of postgresql as postgresql
+  * Increment version, cleanup and changelog for release 2.1.0
+  * Fix module file, remove extra README.md and fix some docs
+  * Correct permission requirement for concat
+  * (GH-130) Fix 'include' parameter for Postgresql 8.1
+  * (GH-130) Amend system tests for Centos 5
+  * Change Modulefile and Changelog for Release 2.1.1
+  * Create dependent directory for sudoers so tests work on Centos 5
+  * Cleaned up and added unit tests
+  * Add documentation for replication flag for postgresql::role
+  * Fix versions for travis-ci
+  * Increase stdlib dependency to include 5.x
+  * Release 2.2.0
+  * Release 2.2.1 + Changelog
+  * Convert system tests to use rspec-system
+  * Fix up and add some tests for unknown OS patch
+  * Include location in postgresql::tablespace test
+  * Fix travis.yml
+  * Fix the non-defaults test failing to use UTF8
+  * (GH-216) Alter role call not idempotent with cleartext passwords
+  * Release 2.4.1
+ 
+ Etienne Pelletier <epelletier@maestrodev.com> (15):
+  * Issue #28 Changed stdlib version to >=2.0.0 to allow using newer version
+    of stdlib.
+  * Added check before adding postgresql::user
+  * Bumped stdlib dependency to 3.x
+  * Added easier support for Postgresql 9.0 (on RedHat platforms)
+  * Pulled repository stuff out of params. Lint cleanup.
+  * Trying to overcome issues with stdlib version
+  * Reverted back to 3.x version of stdlib
+  * More issues with stdlib dependencies.
+  * Stdlib issues again.
+  * Stupid Librarian
+  * Refactored multi-version support.
+  * Removed repo class.
+  * Removed references to $postgresql::paths in class params.
+  * Removed postgresql::version class and moved version info to init.pp.
+  * Removed references to postgresql::paths in class params.
+ 
+ Mickaël Canévet <mickael.canevet@camptocamp.com> (12):
+  * Alter superuser, createdb, createrole, login, replication status and the
+    connection limit of a role that already exists
+  * Add support for optional management of pg_hba.conf
+  * Add support for istemplate parameter where creating db
+  * Fix rspec-system
+  * Add support for installing PL/Perl
+  * Document istemplate parameter
+  * Add missing manifests/plperl.pp file
+  * Use $::operatingsystemrelease instead of $::lsbmajdistrelease
+  * Set plperl_package_name to postgresql-plperl on every RedHat family OS
+    except RHEL5
+  * Test plperl only on non standard installation as it does not work on
+    redhat5
+  * Add README entry for postgresql::plperl
+  * Fix postgresql::plperl documentation
+ 
+ Karel Brezina <karel.brezina@gmail.com> (8):
+  * Added support for tablespaces
+  * Tablespacing improvements
+  * Improved tablespace rspec test
+  * RSpec tests were fixed to work properly with included
+    postgresql_puppet_extras.conf
+  * Improved test result matching for the advanced PGS configuration test.
+  * Added test of the included postgresql configuration file
+  * Added info about the advanced configuration file
+  * Generalization to provide more flexibility in postgresql configuration
+ 
+ Henrik <henrik@haf.se> (7):
+  * end of line comma not valid in versions < 2.8.7
+  * missing 'default' selector case
+  * $quoted_unless had extra $
+  * mis-spelt param names
+  * updating the switch statement looking at osfamily
+  * Updating params.
+  * data dirs on amazon differ
+ 
+ Hunter Haugen <h.haugen@gmail.com> (7):
+  * Update the base class to accept `version` parameter
+  * Split database_grant up
+  * Reindent postgresql::database_grant spec
+  * Update readme
+  * Release 2.4.0
+  * Use boolean for refreshonly
+  * Add specs for psql Type and Provider
+ 
+ Kamil Szymanski <kamil.szymanski.dev@gmail.com> (7):
+  * fix pg_hba_rule for postgres local access
+  * Allow to set connection limit for new role
+  * Update postgres_default_version for Ubuntu
+  * Add supprot for contrib package
+  * Add documentation, rspec test and support for global overriding contrib
+    package name
+  * Add default PostgreSQL version for Ubuntu 13.04
+  * Add missing documentation for istemplate parameter
+ 
+ Kenneth Knowles <kenn@inkling.com> (6):
+  * Initial commit
+  * Add Modulefile
+  * Ignore .vagrant
+  * Ignore output of puppet-module
+  * Improved Modulefile
+  * Advance version to 0.3.0
+ 
+ Ashley Penney <ashley.penney@puppetlabs.com> (5):
+  * Add the two missing variables that the if check requires.
+  * Style guide cleanup.
+  * Remove 3.0, 3.1, and 2.6 to shrink the test matrix.
+  * Prepare a 2.5.0 release.
+  * Goodbye, create_resources.
+ 
+ Dominic Cleal <dcleal@redhat.com> (5):
+  * Add explicit call to concat::setup when creating concat file
+  * Change connection_limit default to string, Puppet 2.6 can't parse
+    negative ints
+  * Pass only arrays to Puppet::Util.execute() for Puppet 2.6 compatibility
+  * Enable hasstatus for EL and Puppet 2.6, to detect running server
+  * Add create_resources to fix Travis CI failure on Puppet 2.6
+ 
+ Jordi Boggiano <j.boggiano@seld.be> (4):
+  * Provide version for ubuntu 12.10
+  * Add support for ubuntu 12.10 status
+  * Add support for the REPLICATION flag when creating roles
+  * Fix readme typo
+ 
+ Michael Arnold <github@razorsedge.org> (4):
+  * Add support for JDBC connector.
+  * Add rspec test for Class['postgresql::java'].
+  * Clean up java.pp manifest documentation.
+  * Drop trailing comma to support Puppet 2.6.
+ 
+ fiddyspence <chris.spence@puppetlabs.com> (4):
+  * Alter escaping in postgresql::config::afterservice
+  * reverting path on exec
+  * amending the unless on the exec for quoting also
+  * modified tests
+ 
+ Andreas Ntaflos <daff@pseudoterminal.org> (3):
+  * Properly quote database name when using `postgresql::psql` for GRANT or
+    REVOKE.
+  * Add new exec 'reload_postgresql' and have the pg_hba.conf file resource
+    notify that exec after changes to pg_hba.conf. This avoids restarting the
+    whole postgresql cluster for configuration changes in pg_hba.conf which
+    only need a reload.
+  * Set sensible path in exec to reload postgres
+ 
+ Chris Price <cprice@sidehatch.(none)> (3):
+  * Fix tests so that they can be run multiple times
+  * Add deprecation warning for postgres::psql
+  * Initial working implementation of ruby psql type/provider
+ 
+ Eric Williamson <eric.williamson@puppetlabs.com> (3):
+  * (PE-2222) Fix suid deprecation warning
+  * Release 1.0.3 - (PE-2441) Backport postgresql::validate_db_connection
+    from postgresql 3.2.0
+  * (PE-2718) Dynamically generate the module version
+ 
+ Flaper Fesp <flaper87@gmail.com> (3):
+  * Removed trailing comma. Makes puppet fail
+  * Add support for psycopg installation
+  * Add support for psycopg installation
+ 
+ Hunter Haugen <hunter@puppetlabs.com> (3):
+  * Release pe_postgresql 1.0.0
+  * Release 1.0.2
+  * (PE-2441) Backport postgresql::validate_db_connection from postgresql
+    3.2.0
+ 
+ fhrbek <filip.hrbek@gmail.com> (3):
+  * Coding style fixes
+  * Added metadata.json to gitignore
+  * Reverted some of the coding style fixes. Strings containing single quotes
+    may be easier to read if enclosed in double quotes although it generated
+    puppet lint warning.
+ 
+ Adrien Thebo <git@somethingsinistral.net> (2):
+  * Add Debian wheezy support for default version fact
+  * Update postgres_default_version to 9.1 for debian 7.0
+ 
+ Brett Porter <brett@apache.org> (2):
+  * add optional cwd to the postgres_psql command
+  * set an appropriate parent for the parameter
+ 
+ Bruno Harbulot <bruno@distributedmatter.net> (2):
+  * Setting the owner of the database with createdb.
+  * Adding the ability to create users without a password.
+ 
+ Erik Dalén <dalen@spotify.com> (2):
+  * fix lots of style issues
+  * don't modify variables
+ 
+ Jari Bakken <jari.bakken@gmail.com> (2):
+  * Remove trailing commas.
+  * Fix path for `/bin/cat`
+ 
+ Lauren Rother <lauren.rother@puppetlabs.com> (2):
+  * Updated content to conform to README best practices template
+  * Fixed typos, rewording and typsetting per feedback
+ 
+ Matthaus Owens <matthaus@puppetlabs.com> (2):
+  * Update status for postgres service on Debian
+  * (PE-2539) Add containment for external consumers
+ 
+ Matthias Viehweger <kronn@kronn.de> (2):
+  * Rename role_spec.pp to role_spec.rb
+  * Rename tablespace_spec.pp to tablespace_spec.rb
+ 
+ Spenser Gilliland <Spenser309@gmail.com> (2):
+  * Fix Issue #38: Require postgresql-server package to run initdb exec
+  * Syntax Fix
+ 
+ William Van Hevelingen <blkperl@cat.pdx.edu> (2):
+  * Fix typo in server smoke test
+  * Puppet lint fixes
+ 
+ dharwood <harwoodd@cat.pdx.edu> (2):
+  * ACLs functioning, added examples in README and test, comments in config
+    manifests
+  * typos in readme and test/server.pp
+ 
+ Adrien Thebo <adrien@puppetlabs.com> (1):
+  * Add postgresql::devel for development dependencies
+ 
+ Albert Koch <kocha@slagit.net> (1):
+  * Support special characters in database role name
+ 
+ Andreas Ntaflos <andreas.ntaflos@rise-world.com> (1):
+  * Set /tmp as default CWD for postgresql_psql
+ 
+ Björn Albers <bjoernalbers@googlemail.com> (1):
+  * Add sample usage for postgresql::server class.
+ 
+ Carlos Villela <cv@lixo.org> (1):
+  * Allow SQL commands to be run against a specific DB
+ 
+ Dan Prince <dprince@redhat.com> (1):
+  * Add test on postgresql::python.
+ 
+ Florin Broasca <florin.broasca@gmail.com> (1):
+  * Fix default version for Ubuntu and Debian
+ 
+ Marco Nenciarini <marco.nenciarini@2ndquadrant.it> (1):
+  * Tag the postgresql-contrib package as postgresql
+ 
+ Matthaus Litteken <mlitteken@gmail.com> (1):
+  * Remove $service_provider setting for ubuntu
+ 
+ Max Martin <max@puppetlabs.com> (1):
+  * Correct database_user param name
+ 
+ Nick Lewis <nick@puppetlabs.com> (1):
+  * Update Modulefile for 1.0.1
+ 
+ Richard Arends <github@mosibi.nl> (1):
+  * changed validate_db_connection.pp
+ 
+ Ryan Coleman <ryan@puppetlabs.com> (1):
+  * Adjust ownership to Puppet Labs
+ 
+ Simão Fontes <simaofontes@gmail.com> (1):
+  * Update manifests/params.pp
+ 
+ jv <jeff@jeffvier.com> (1):
+  * typo fix in example
+ 
+ nzakaria <nzakaria@atlassian.com> (1):
+  * Update templates/pg_hba.conf.erb
+ 
+ stormcrow <harwoodd@cat.pdx.edu> (1):
+  * first commit of acls
+ 
+2013-09-13 Matthaus Owens <mlitteken@gmail.com> - 0.0.5
+========================================================
+ Jeff Weiss <jeff.weiss@puppetlabs.com> (1):
+  * (PE-475) Make module deps more accurate
+ 
+ Rob Braden <bradejr@puppetlabs.com> (1):
+  * Bumping module to support puppetlabs-postgresql 2.x
+ 
+2013-05-30 Nick Lewis <nick@puppetlabs.com> - 0.0.3
+====================================================
+ Nick Lewis <nick@puppetlabs.com> (2):
+  * Propagate postgres version to the postgres class
+  * Bump version to 0.0.3
+ 
+2013-05-03 Matthaus Owens <matthaus@puppetlabs.com> - 0.0.2
+============================================================
+ fhrbek <filip.hrbek@gmail.com> (7):
+  * Initial commit
+  * Renamed module author to puppetlabs
+  * Fixed alignment
+  * Added java package name
+  * Removed metadata.json from git
+  * Added custom libdir
+  * Removed obsolete parameter 'libdir'
+ 
+ Karel Brezina <karel.brezina@gmail.com> (2):
+  * Configuration hash is passed to server
+  * Locale was set to 'en_US.UTF8'
+ 
+ Matthaus Owens <matthaus@puppetlabs.com> (2):
+  * Update default version to 9.2 to match current PE reality.
+  * Update Modulefile for 0.0.2
+ 

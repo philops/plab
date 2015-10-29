@@ -1,0 +1,19 @@
+#!/opt/puppetlabs/puppet/bin/ruby
+
+require "json"
+require "yaml"
+
+<% if @operatingsystem == 'windows' -%>
+   puppetCmd = "puppet"
+<% else -%>
+   puppetCmd = "/opt/puppetlabs/bin/puppet"
+<% end -%>
+facts = %x(#{puppetCmd} facts)
+facts_j = JSON.parse(facts)
+facts_y = YAML.dump(facts_j["values"])
+
+File.open('<%= @mco_etc -%>/facts.yaml.new', 'w') do |f|
+  f.puts facts_y
+end
+
+File.rename('<%= @mco_etc -%>/facts.yaml.new', '<%= @mco_etc -%>/facts.yaml')

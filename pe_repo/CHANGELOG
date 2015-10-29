@@ -1,0 +1,229 @@
+2015-09-14 Brandon High <highb@users.noreply.github.com> - 2015.3.0-rc1
+========================================================================
+ Josh Partlow <joshua.partlow@puppetlabs.com> (16):
+  * (PE-11198,PE-11568,PE-11243,PE-11351) Remove http status check
+  * (PE-10164) Remove pe-puppet-dashboard-workers from service list
+  * (PE-10164) Account for either 3.8.x or 2015.2.x upgrade
+  * (PE-10164) Perform pe-code-migration step on upgrade
+  * (PE-11366) Add basic rspec-puppet support
+  * (PE-11366) Add basic specs testing compilation
+  * (maint) Plumb ubuntu_1004_amd64 with agent_version
+  * (maint) Update metadata puppet_enterprise version
+  * (PE-11366) Fall back to compile master's pe_build_version
+  * (PE-11366) Change pe_build to pe_repo::default_pe_build
+  * (PE-11366) Correct spacing in the .fixtures.yml
+  * (PE-11366) Ensure require spec_helper in each of the defines specs
+  * (PE-10164) Rework download_from_url() not to use globals
+  * (PE-10164) Export OLD_PUPPET_BIN_DIR so <platform>.bash.erb see it
+  * (PE-10164) Do not halt for --detailed-exitcodes
+  * (PE-10164) Backup puppet.conf and move old pe modules
+ 
+ Britt Gresham <brittcgresham@gmail.com> (2):
+  * (PE-10326, PE10327) Add deb 8 and ubuntu 15 support
+  * (PE-10323, PE-10324) Add fedora 21 and 22 support to pe_repo
+ 
+ mwbutcher <mwbutcher@puppetlabs.com> (2):
+  * (PE-11018) Sles10 frictionless agent install script fails
+  * (PE-11584) Update pe_repo osx code to match new tarball and name changes
+ 
+ Charlie Sharpsteen <source@sharpsteen.net> (1):
+  * (PE-9587) Allow multiple versions of AIX, Solaris
+ 
+2015-07-28 Brandon High <brandon.high@puppetlabs.com> - 2015.3.0-rc0
+=====================================================================
+ Brandon High <brandon.high@puppetlabs.com> (1):
+  * (PE-10937) Version bump for new branch
+ 
+2015-09-16 Eric Williamson <github@williamson.vg> - 2015.2.1
+=============================================================
+ Josh Partlow <joshua.partlow@puppetlabs.com> (21):
+  * (PE-11041) Do not fail http_status_code call if lacking Internet
+  * (maint) Namespace http_status_code as pe_http_status_code
+  * (PE-11198,PE-11568,PE-11243,PE-11351) Remove http status check
+  * (PE-10164) Remove pe-puppet-dashboard-workers from service list
+  * (PE-10164) Account for either 3.8.x or 2015.2.x upgrade
+  * (PE-10164) Perform pe-code-migration step on upgrade
+  * (PE-11366) Add basic rspec-puppet support
+  * (PE-11366) Add basic specs testing compilation
+  * (maint) Plumb ubuntu_1004_amd64 with agent_version
+  * (maint) Update metadata puppet_enterprise version
+  * (PE-11366) Fall back to compile master's pe_build_version
+  * (PE-11366) Change pe_build to pe_repo::default_pe_build
+  * (PE-11366) Correct spacing in the .fixtures.yml
+  * (PE-11366) Ensure require spec_helper in each of the defines specs
+  * (PE-10164) Rework download_from_url() not to use globals
+  * (PE-10164) Export OLD_PUPPET_BIN_DIR so <platform>.bash.erb see it
+  * (PE-10164) Do not halt for --detailed-exitcodes
+  * (PE-10164) Backup puppet.conf and move old pe modules
+  * (maint) Pass codename to osx define test
+  * (PE-12033) Match puppet-agent tarball structure for Solaris
+  * (PE-12045) Change pe_repo::osx to use os version instead of codename
+ 
+ Britt Gresham <brittcgresham@gmail.com> (2):
+  * (PE-10326, PE10327) Add deb 8 and ubuntu 15 support
+  * (PE-10323, PE-10324) Add fedora 21 and 22 support to pe_repo
+ 
+ mwbutcher <mwbutcher@puppetlabs.com> (2):
+  * (PE-11018) Sles10 frictionless agent install script fails
+  * (PE-11584) Update pe_repo osx code to match new tarball and name changes
+ 
+ Charlie Sharpsteen <source@sharpsteen.net> (1):
+  * (PE-9587) Allow multiple versions of AIX, Solaris
+ 
+2015-07-13 Josh Partlow <jpartlow@glatisant.org> - 2015.2.0-rc0
+================================================================
+ Eric Williamson <eric.williamson@puppetlabs.com> (25):
+  * (PE-2718) Dynamically generate version file for the module
+  * (maint) Update module to just metadata.json instead of modulefile
+  * (PE-7349) Remove duplication in templates
+  * (PE-7349) Move upgrade check to before puppet is installed
+  * (PE-7069) Stop setting environment in puppet.conf
+  * (PE-7030) Change server setting from agent to main section
+  * (maint) Pass arguments to puppet_config_set
+  * (PE-8687) Fix passing of command line arguments for puppet config
+  * (PE-8933) Fix ensure link conditional
+  * (PE-10209) Add parameter for debian codenames
+  * (PE-10209) Create puppet agent collection version variable
+  * (PE-10209) Update base agent download url
+  * (PE-10209) Update debian template for new folder structure
+  * (PE-10209) Update repo class to download and symlink new aio
+  * (PE-10209) Allow user to specify agent version
+  * (PE-10483) Remove sles 12 i386 class
+  * (PE-10469) Add osx puppet agent support
+  * (PE-10523) Add OSX 10.10 support
+  * (PE-10469) Default to agent_build on osx instead of agent_version
+  * (PE-10333) Support instances were master packages already exist
+  * (PE-10333) Add exec to create repo_dir
+  * (PE-10132) Always downlaod agent tarballs on deb
+  * (PE-10132) Use relative path for deb tarball_creates
+  * (PE-7042) Add support for downloading windows MSI
+  * (PE-10857) Restart puppet after config set
+ 
+ Brandon High <brandon.high@puppetlabs.com> (21):
+  * (fix) Bump puppet_enterprise module version
+  * (PE-5410) Fix EL simplified agent
+  * (PE-8933) Add symlinks after frictionless install
+  * (PE-8899) Make symlinks warning consistent with installer
+  * (PE-9014) Update solaris path for symlinks
+  * (PE-9014) Update symlink creation logic
+  * (PE-9014) Update wording on failed symlinks
+  * (PE-9014) Remove /usr/bin symlinks
+  * (PE-9014) Don't stop installer if we fail to create dir
+  * (PE-8036) Update to AIO paths again
+  * (PE-8036) Use /opt/puppetlabs/bin symlinks
+  * (PE-8036) Use server/data folder for package store
+  * (PE-8036) Fix puppet_bin_dir() to not blow up if puppet isn't installed
+  * (PE-8036) Add puppet_installed() function
+  * (PE-8036) Use puppet_installed to determine if upgrade
+  * (PE-8036) Simplify puppet_installed/puppet_bin_dir
+  * (PE-8036) Use PUPPET_BIN_DIR
+  * (PE-8036) Install correct package, fix require
+  * (PE-8036) Fix agent package for deb/sles
+  * (PE-8036) Fix yum repo config name
+  * (PE-8036) Fix shared_functions to use correct ruby, ensure correct
+    service
+ 
+ Nick Lewis <nick@puppetlabs.com> (14):
+  * Support downloading with curl or wget
+  * (PE-2973) Add support for installing EL 4 agents
+  * (PE-2971) Add support for installing Solaris 10 agents
+  * (PE-2973) Properly support upgrades for EL4
+  * (PE-3019) Add support for installing Solaris 11 agents
+  * (PE-3019) Add Solaris 11 to the list of supported platforms
+  * Properly quote EL4 rpm invocation
+  * (PE-2970) Add support for installing AIX agents
+  * (PE-2970) Use --force rather than --replacepkgs for AIX
+  * (PE-2538) Only download tarballs when necessary
+  * (PE-3235) Add support for installing OS X agents
+  * (PE-6529) Force the use of TLSv1 where applicable
+  * (PE-6570) Rename el4 repo type to rpm
+  * (PE-6570) Use rpm repo type for SLES 10
+ 
+ Reid Vandewiele <reid@puppetlabs.com> (9):
+  * Enable command-line customization of agent install
+  * Fix erroneous extra -s argument to bash in install
+  * Convert from using sed, cut, egrep to pure bash
+  * Replace duplication with partials template
+  * (PE-6596) On AIX platforms invoke curl correctly
+  * Use -k if curl_no_peer_validation can't find ver
+  * UX for curl_no_peer_verify should be as a command
+  * Shorten and simplify curl_no_peer_verify
+  * Account for failure to determine curl version
+ 
+ Britt Gresham <britt@puppetlabs.com> (5):
+  * (PE-6969) Add permissions to extracted files
+  * (PE-7232) Explicit string values for file modes
+  * (PE-8036) Change file paths to AIO paths
+  * (PE-8687) Move common bash code into partials
+  * (PE-8687) Simplified compile master upgrade script
+ 
+ Andrew Roetker <andrew.roetker@puppetlabs.com> (4):
+  * (PE-3037) Lay down an el.repo file for el systems
+  * (PE-3775) Support repository updates for sles
+  * (PE-3775) Delete the repository and re-add it
+  * (PE-3507) Quote file modes and eliminate dynamic scoping in erbs
+ 
+ Brandon High <highb@users.noreply.github.com> (2):
+  * Revert "(PE-9070) Merge up 3.8.x into 3.99.x"
+  * Revert "Revert "(PE-9070) Merge up 3.8.x into 3.99.x""
+ 
+ Britt Gresham <brittcgresham@gmail.com> (2):
+  * (PE-10480) Only download PE tarball if it exists
+  * (PE-10480) Only build packages.txt when tarball downloaded
+ 
+ Matthaus Owens <matthaus@puppetlabs.com> (2):
+  * (RE-1038) Add trusty support to pe_repo module
+  * (RE-1038) Add 14.04 to the list of supported platforms in install.erb
+ 
+ Rob Braden <bradejr@puppetlabs.com> (2):
+  * (pe-5545) Simplified agent support for sles10
+  * (re-1215) SLES-12 support for simpified agent
+ 
+ Brian Cain <brian.cain@puppetlabs.com> (1):
+  * (maint) Depend on PE module >= 3.4.0
+ 
+ Charlie Sharpsteen <charlie@puppetlabs.com> (1):
+  * Improve readability of precedence logic
+ 
+ Heath Seals <heath@puppetlabs.com> (1):
+  * (RE-4904) OSX installer complains about malformed sed
+ 
+ Josh Partlow <joshua.partlow@puppetlabs.com> (1):
+  * (PE-10208) Ensure a [main] section in agent puppet.conf
+ 
+ Mark Butcher <mark.butcher@puppetlabs.com> (1):
+  * (pe4303) using ruby to downcase facter fqdn output
+ 
+ Ryan McKern <ryan.mckern@puppetlabs.com> (1):
+  * (RE-942) Add RHEL7 repo support
+ 
+2014-04-01 Eric Williamson <eric.williamson@puppetlabs.com> - 0.7.6
+====================================================================
+ Eric Williamson <eric.williamson@puppetlabs.com> (1):
+  * (maint) Update version to 0.7.6 in Modulefile
+ 
+ Nick Lewis <nick@puppetlabs.com> (1):
+  * (PE-3066) Improve message when agent packages aren't installed
+ 
+2014-03-25 Matthaus Owens <matthaus@puppetlabs.com> - 0.7.5
+============================================================
+ Matthaus Owens <matthaus@puppetlabs.com> (2):
+  * (RE-1356) Add trusty support to pe_repo module
+  * (maint) Update version to 0.7.5 in Modulefile
+ 
+2014-03-11 Nick Lewis <nick@puppetlabs.com> - 0.7.4
+====================================================
+ Nick Lewis <nick@puppetlabs.com> (6):
+  * (PE-2674) Always start services for debian
+  * Update Modulefile for 0.7.2
+  * (PE-2969) Use a tempfile for the installer script
+  * Update Modulefile for 0.7.3
+  * (PE-3072) Download tarballs from pm rather than S3
+  * Update Modulefile for 0.7.4
+ 
+ Chris Barker <cbarker@puppetlabs.com> (1):
+  * (PE-2674) start services on new install only
+ 
+2014-01-28 Eric Williamson <eric.williamson@puppetlabs.com> - 0.7.1
+====================================================================
+ * no changes since the previous version.

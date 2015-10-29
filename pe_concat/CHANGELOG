@@ -1,0 +1,498 @@
+2015-04-24 Josh Partlow <jpartlow@glatisant.org> - 1.1.2
+=========================================================
+ Brian Cain <brian.cain@puppetlabs.com> (3):
+  * (PE6375) Namespace concat to pe_concat for v1.1.x
+  * (maint) Pass PE module to acceptance tests
+  * (maint) Update metadata.json file
+ 
+ Branan Riley <branan@puppetlabs.com> (1):
+  * (PE-9365) Fully manage owner and group of concat::setup Files
+ 
+ Josh Partlow <joshua.partlow@puppetlabs.com> (1):
+  * (PE-9442) Confine to rspec-puppet 1 and rspec 2
+ 
+2014-09-11 Travis Fields <cyberious@users.noreply.github.com> - 1.1.1
+======================================================================
+ Morgan Haskel <morgan@puppetlabs.com> (22):
+  * Fixes to get tests running on trusty.
+  * Add nodeset for ubuntu trusty.
+  * Update changelog, modulefile and metadata.json for supported 1.0.3
+    release.
+  * Update CHANGELOG and Modulefile for 1.1.0 release.
+  * Update version in metadata.json.
+  * Update PE version requirement.
+  * Try to force it to use the correct version of beaker-rspec.
+  * 'wheel' is the root group for osx.
+  * Prep for 1.0.4 release.
+  * Update spec_helper for consistency
+  * Remove dependency on stdlib4
+  * Lack of idempotency with `ensure => 'absent'`
+  * Stop checking for empty stderr
+  * Missed two stderr checks
+  * 1.1.1 prep
+  * 'wheel' is the root group for osx.
+  * There are no UNSUPPORTED_PLATFORMS defined for 1.1
+  * Fixing up tests
+  * Try to remove all the platform dependent stuff
+  * Work-around.
+  * Windows and solaris fixes
+  * Windows fixes
+ 
+ Hunter Haugen <hunter@puppetlabs.com> (16):
+  * Convert specs to beaker and increase coverage
+  * Allow custom gemsource
+  * Don't remove /tmp/concat in after :each
+  * Don't remove /tmp/concat in after :each
+  * Fix test port from 596cec1
+  * Disable test for unimplemented feature
+  * This test is implemented incorrectly, and is testing an unimplemented
+    feature.
+  * Fix aix/windows ownership issues and vardir path
+  * Avoid multi-line greps on solaris 10
+  * Correct syntax
+  * It is actually all Solaris
+  * Use tmpdir instead of /tmp for windows compatability
+  * Lets can't be used outside of a test context
+  * Correct the incorrect quotes
+  * Add windows as unsupported
+  * Remove autorelease
+ 
+ Ashley Penney <ashley.penney@puppetlabs.com> (14):
+  * Fix ensure => absent with path => set.
+  * Fix the tests by switching to stdlib 4.x instead of 3.x.
+  * Ensure that ::setup runs before ::fragment in all cases.
+  * Port over acceptance tests from master.
+  * Prepare 1.0.1 release.
+  * Prepare for supported modules.
+  * Prepare supported module 1.0.2.
+  * Add in missing files to work around Puppet bug.
+  * Fix newlines.
+  * Improve this so it works on Ubuntu 14.04.
+  * Claim PE3.3 support.
+  * Remove all the eq() checks as this breaks in PE3.3.
+  * Update for the 1.0.3 release being unsupported.
+  * Pin rspec to 2.x.
+ 
+ Colleen Murphy <colleen@puppetlabs.com> (9):
+  * Add configuration file for modulesync
+  * Sync files
+  * Update .sync.yml to support new .travis.yml configs
+  * Synchronize .travis.yml
+  * Update Gemfile for .travis.yml defaults
+  * Add validate and lint tasks to travis script
+  * Remove Puppet 2.7 from travis matrix
+  * Add testing on Ruby 1.8.7 with Puppet 3 to travis.yml
+  * Pin puppet-lint to 0.3.2
+ 
+ Joshua Hoblitt <jhoblitt@cpan.org> (4):
+  * enable the ruby concat script on Solaris
+  * Validate the concat::fragment order parameter as string||integer
+  * raise the "low bar" travis puppet version to 2.7.6
+  * add .vagrant to .gitignore
+ 
+ Alex Dreyer <alex@puppetlabs.com> (2):
+  * Switch test to use a much higher gid/uid
+  * Switch test to use a much higher gid/uid
+ 
+ Alexander Kuznetsov <acca@cpan.org> (2):
+  * [Most of] variables quoted to allow multi-word warning messages, spaces
+    in file/directory names, etc.
+  * Proper quoting of quotes.
+ 
+ Geoff Williams <geoff.williams@puppetlabs.com> (2):
+  * fix concat broken on windows due to case sensitive regexp -- made it case
+    insensitive
+  * added missing line endings (-l) support for windows and solaris
+ 
+ Igor Galić <i.galic@brainsware.org> (2):
+  * be more ignorant
+  * small typo: missing losing '
+ 
+ Lucien Weller <lucien@wellernet.ch> (2):
+  * Added double quotes to paths in concat command, so that it does not fail
+    when path of target file contains some blanks.
+  * ignore mode an owner on windows
+ 
+ Pi3r <pradermecker@yahoo.ca> (2):
+  * Use explicit undef in else case
+  * Update README.md
+ 
+ Aaron Blew <aaron@blewtech.com> (1):
+  * Help message for pluginsync now references the correct section of the
+    config
+ 
+ Axel Bock <axel.bock@dvag.com> (1):
+  * fix: permitting $backup to be a boolean value
+ 
+ Balint Deak <balint.deak@1und1.de> (1):
+  * fix numeric sorting
+ 
+ Garrett Honeycutt <code@garretthoneycutt.com> (1):
+  * Enable fast finish in Travis
+ 
+ Lauren Rother <lauren.rother@puppetlabs.com> (1):
+  * Adds "Release Notes/Known Bugs" to Changelog,updates file format to
+    markdown, standardizes the format of previous entries
+ 
+ Luis Fernandez Alvarez <luis.fernandez.alvarez@cern.ch> (1):
+  * Add quotes to the ruby script location
+ 
+ Matt Ezell <ezellma@ornl.gov> (1):
+  * Remove documentation for deprecated $warn_message parameter
+ 
+ Max Griffiths <maxgriff@thoughtworks.com> (1):
+  * Update README.md
+ 
+ Mike Dorman <mdorman@godaddy.com> (1):
+  * Change default 'order' parameter to be a string Under Puppet 3.5.1 (and
+    possibly earlier versions, too), the validate_string($order) fails when
+    $order is actaully a numeric type.  Apparently there is more strict type
+    checking now.  Can't just change validate_string to a is_numeric check,
+    because it's fairly common to use strings like '01' for the order
+    parameter, which doesn't pass the is_numeric test.  Additionally, there
+    is nothing saying that $order must be a number.  Ultimately the ordering
+    gets implemented as filesystem directory list sorting.
+ 
+ Neil Prockter <prockter@lse.ac.uk> (1):
+  * ensure concat file fragments are always replaced
+ 
+ Paul Chechetin <paulche@yandex.ru> (1):
+  * Replace LANG => LC_ALL
+ 
+ Théophile Helleboid - chtitux <chtitux@gmail.com> (1):
+  * README.md : add missing ','
+ 
+ Tomas Doran <tdoran@yelp.com> (1):
+  * Fix errors with the future parser.
+ 
+ Travis Fields <travis@puppetlabs.com> (1):
+  * Remove deprecated puppet_module_install in favor of copy_module_to
+ 
+2014-01-07 Ashley Penney <ashley.penney@puppetlabs.com> - 1.1.0-rc1
+====================================================================
+ * no changes since the previous version.2014-05-14 Morgan Haskel <morgan@puppetlabs.com> - 1.1.0
+=========================================================
+ Joshua Hoblitt <jhoblitt@cpan.org> (35):
+  * remove undocumented requirement to include concat::setup in manifest
+  * improve whitespace consistency + remove semicolon resource compression
+  * remove unused $gnu param from define concat
+  * validate define concat params + split warn param
+  * validate define concat::fragment params
+  * add tests for class concat::setup
+  * add stdlib to rspec-system tests
+  * remove puppet 0.24 support
+  * make class concat::setup a private class
+  * use $owner instead of $id to avoid confusion with $::id
+  * mv spec/defines -> spec/unit/defines
+  * compatibility fixes for ruby 1.8.7 / puppet 2.7
+  * only backup target concat file + remove backup param from
+    concat::fragment
+  * remove default owner/user and group values
+  * remove purging of /usr/local/bin/concatfragments.sh
+  * add deprecation warnings on removed parameters + warn on inclusion of
+    concat::setup
+  * always exec the concatfragments script as root when running as root
+  * remove usage of resource defaults for file owner/permissions
+  * remove dead files
+  * rename README.markdown -> README.md
+  * fix or suppress all lint warnings
+  * allow concat::fragment target param to be an arbitrary string
+  * deprecate concat::fragment mode, owner, & group params
+  * add tests for concat_basedir fact
+  * convert from 4 space to 2 space indent
+  * add rspec-puppet pending test for warning on inclusion of concat::setup
+  * allow source param to concat::fragment to be a string or an Array
+  * clean up between system spec files
+  * minor system test cleanups
+  * add system tests for replacing symlinks and directories
+  * add system tests for file fragments sourced from a single file
+  * fix regression preventing usage of fragment ensure => /target syntax
+  * revert concat $warn/$warn_message param split + add deprecation warnings
+  * add README section on API deprecations since version 1.0.0
+  * work around RubyGems 2.2.0 breaking ruby 1.8.7
+ 
+ Ashley Penney <ashley.penney@puppetlabs.com> (10):
+  * Ensure that ::setup runs before ::fragment in all cases.
+  * Rewrite the docs to fit the current best practices for Puppetlabs
+    modules.
+  * 1.1.0 release.
+  * Add information on deprecations.
+  * Correct the version we're releasing.
+  * Add workaround back in, problems still happening.
+  * Fix ensure => absent with path => set.
+  * Fix the tests by switching to stdlib 4.x instead of 3.x.
+  * Fix newlines.
+  * Improve this so it works on Ubuntu 14.04.
+ 
+ Hunter Haugen <hunter@puppetlabs.com> (4):
+  * Convert specs to beaker and increase coverage
+  * Allow custom gemsource
+  * Don't remove /tmp/concat in after :each
+  * Remove autorelease
+ 
+ Alexander Kuznetsov <acca@cpan.org> (2):
+  * [Most of] variables quoted to allow multi-word warning messages, spaces
+    in file/directory names, etc.
+  * Proper quoting of quotes.
+ 
+ Lucien Weller <lucien@wellernet.ch> (2):
+  * Added double quotes to paths in concat command, so that it does not fail
+    when path of target file contains some blanks.
+  * ignore mode an owner on windows
+ 
+ Luis Fernandez Alvarez <luis.fernandez.alvarez@cern.ch> (2):
+  * Add Windows support
+  * Removed duplicated opts.separator call in concatfragments.rb
+ 
+ Matthew Haughton <3flex@users.noreply.github.com> (2):
+  * Improve formatting of code example
+  * remove workaround for Rubygems 2.2.0 bug
+ 
+ Morgan Haskel <morgan@puppetlabs.com> (2):
+  * Add nodeset for ubuntu trusty.
+  * Update CHANGELOG and Modulefile for 1.1.0 release.
+ 
+ Paul Chechetin <paulche@yandex.ru> (2):
+  * Add Travis badge
+  * Replace LANG => LC_ALL
+ 
+ Tristan Smith <tsmith@palantir.com> (2):
+  * Initial pass at test to ensure fragments accept and properly handle the
+    underlying file source attribute.
+  * put the shell() calls into before{} blocks so that they're executed
+    meaningfully.  Testing to make sure a file doesn't exist shouldn't be as
+    much of a hack as that is. I'm obviously missing something in the
+    framework, but this works.
+ 
+ Aaron Blew <aaron@blewtech.com> (1):
+  * Help message for pluginsync now references the correct section of the
+    config
+ 
+ Alex Dreyer <alex@puppetlabs.com> (1):
+  * Switch test to use a much higher gid/uid
+ 
+ Balint Deak <balint.deak@1und1.de> (1):
+  * fix numeric sorting
+ 
+ Frédéric Lespez <frederic.lespez@free.fr> (1):
+  * Add an ensure parameter to concat define
+ 
+ Garrett Honeycutt <code@garretthoneycutt.com> (1):
+  * Enable fast finish in Travis
+ 
+ Graham Bleach <graham@songkick.com> (1):
+  * Fix group ownership on files.
+ 
+ Henrik Feldt <henrik@haf.se> (1):
+  * See #67
+ 
+ Igor Galić <i.galic@brainsware.org> (1):
+  * be more ignorant
+ 
+ JustinHook <justinhook88@yahoo.co.uk> (1):
+  * Added .gitattributes to maintain line endings for .sh files
+ 
+ Matthew Schmitt <matt@abnerpeacock.net> (1):
+  * Cleaning up linting error with ensure param
+ 
+ Max Griffiths <maxgriff@thoughtworks.com> (1):
+  * Update README.md
+ 
+ Michiel Brandenburg <michiel@silverstreet.com> (1):
+  * Puppet 2.6.x compatibility
+ 
+ Pi3r <pradermecker@yahoo.ca> (1):
+  * Use explicit undef in else case
+ 
+ Terri Haber <terrimonster@gmail.com> (1):
+  * adding basic manifest tests
+ 
+ jhoblitt <jhoblitt@cpan.org> (1):
+  * update travis matrix
+ 
+ petems <p.morsou@gmail.com> (1):
+  * Updated .gitignore for spec generated files
+ 
+2014-09-29 Nick Lewis <nick@puppetlabs.com> - 1.0.5
+====================================================
+ Brian Cain <brian.cain@puppetlabs.com> (3):
+  * (PE-5980) Namespace concat in READMEs
+  * (PE-5980) Namespace concat to pe_concat
+  * (PE-5980) Namespace concat_basedir to pe_concat_basedir
+ 
+ Nick Lewis <nick@puppetlabs.com> (1):
+  * (maint) Determine version number dynamically
+ 
+2014-06-17 Ashley Penney <ashley.penney@puppetlabs.com> - 1.0.4
+================================================================
+ Morgan Haskel <morgan@puppetlabs.com> (3):
+  * Try to force it to use the correct version of beaker-rspec.
+  * 'wheel' is the root group for osx.
+  * Prep for 1.0.4 release.
+ 
+ Ashley Penney <ashley.penney@puppetlabs.com> (1):
+  * Pin rspec to 2.x.
+ 
+2014-06-04 Hunter Haugen <hunter@puppetlabs.com> - 1.0.3
+=========================================================
+ Morgan Haskel <morgan@puppetlabs.com> (4):
+  * Fixes to get tests running on trusty.
+  * Update changelog, modulefile and metadata.json for supported 1.0.3
+    release.
+  * Update version in metadata.json.
+  * Update PE version requirement.
+ 
+ Ashley Penney <ashley.penney@puppetlabs.com> (3):
+  * Claim PE3.3 support.
+  * Remove all the eq() checks as this breaks in PE3.3.
+  * Update for the 1.0.3 release being unsupported.
+ 
+2014-03-03 Hunter Haugen <hunter@puppetlabs.com> - 1.0.2
+=========================================================
+ Hunter Haugen <hunter@puppetlabs.com> (12):
+  * Don't remove /tmp/concat in after :each
+  * Fix test port from 596cec1
+  * Disable test for unimplemented feature
+  * This test is implemented incorrectly, and is testing an unimplemented
+    feature.
+  * Fix aix/windows ownership issues and vardir path
+  * Avoid multi-line greps on solaris 10
+  * Correct syntax
+  * It is actually all Solaris
+  * Use tmpdir instead of /tmp for windows compatability
+  * Lets can't be used outside of a test context
+  * Correct the incorrect quotes
+  * Add windows as unsupported
+ 
+ Ashley Penney <ashley.penney@puppetlabs.com> (3):
+  * Prepare for supported modules.
+  * Prepare supported module 1.0.2.
+  * Add in missing files to work around Puppet bug.
+ 
+ Alex Dreyer <alex@puppetlabs.com> (1):
+  * Switch test to use a much higher gid/uid
+ 
+ Lauren Rother <lauren.rother@puppetlabs.com> (1):
+  * Adds "Release Notes/Known Bugs" to Changelog,updates file format to
+    markdown, standardizes the format of previous entries
+ 
+2014-02-12 Hunter Haugen <hunter@puppetlabs.com> - 1.0.1
+=========================================================
+ Ashley Penney <ashley.penney@puppetlabs.com> (4):
+  * Release 1.0.0.
+  * Ensure that ::setup runs before ::fragment in all cases.
+  * Port over acceptance tests from master.
+  * Prepare 1.0.1 release.
+ 
+ Aaron Blew <aaron@blewtech.com> (1):
+  * Help message for pluginsync now references the correct section of the
+    config
+ 
+ Paul Chechetin <paulche@yandex.ru> (1):
+  * Replace LANG => LC_ALL
+ 
+2013-08-09 Hunter Haugen <h.haugen@gmail.com> - 1.0.0-rc1
+==========================================================
+ * no changes since the previous version.2013-08-14 Hunter Haugen <h.haugen@gmail.com> - 1.0.0
+======================================================
+ Tom McLaughlin <tmclaughlin@hubspot.com> (4):
+  * Ability to control if fragments should always have a newline at the end.
+  * Add -l to getopts
+  * new_line -> newline
+  * Fix spec tests
+ 
+ Ashley Penney <ashley.penney@puppetlabs.com> (3):
+  * Add rspec-system tests.
+  * Release 1.0.0.
+  * Release 1.0.0.
+ 
+ Jasper Poppe <jpoppe@ebay.com> (2):
+  * added (file) $replace parameter to concat
+  * added description of replace in the comment block
+ 
+ Marc Haber <mh+puppet-concat@zugschlus.de> (2):
+  * refer to manifest files for option docs
+  * gracefully handle \n in fragment resource name
+ 
+ Andreas Rammhold <andreas@rammhold.de> (1):
+  * Allow WARNMSG to contain/start with '#'
+ 
+ Andy Bohne <bohne.andrew@pennmutual.com> (1):
+  * Added -r flag to read so that filenames with \ will be read correctly
+ 
+ Mark Chappell <mchappel@redhat.com> (1):
+  * RDoc cleanup
+ 
+ Maxence Dunnewind <maxence@dunnewind.net> (1):
+  * remove unneeded ','
+ 
+ R.I.Pienaar <rip@devco.net> (1):
+  * fix markup
+ 
+ Raphael Lorenzeto <raphael.lorenzeto@gmail.com> (1):
+  * Adding more helpful message for 'pluginsync = true'.
+ 
+ Spencer Krum <nibz@cat.pdx.edu> (1):
+  * Refactor loop to use for-do instead of while-read.
+ 
+ Wijnand Modderman-Lenstra <maze@pyth0n.org> (1):
+  * Move away from defining resource defaults, we can just pass $source and
+    $content directly to the file resource
+ 
+ floatingatoll <rsoderberg@gmail.com> (1):
+  * Style guideline fix for README example's mode
+ 
+ mh <mh@immerda.ch> (1):
+  * sort always with LANG=C
+ 
+ plantigrade <plantigrade@plantigrade.org> (1):
+  * Update concatfragments.sh ... fix broken behavior introduced in
+    3d60c9ef6162425c0bf9eb2004d9da375965efc9
+ 
+2012-09-04 R.I.Pienaar <rip@devco.net> - 0.2.0
+===============================================
+ Jan Vansteenkiste <jan@vstone.eu> (4):
+  * Allow overriding the target path of a (concat) file and use a custom
+    name.
+  * Add a second spec test for the name/path combination
+  * Document the path parameter and provide a small use case.
+  * Fixes various puppet-lint warnings.
+ 
+ Paul Belanger <paul.belanger@polybeacon.com> (3):
+  * Lets use puppetlabs_spec_helper Signed-off-by: Paul Belanger
+    <paul.belanger@polybeacon.com>
+  * Add Travis CI support Signed-off-by: Paul Belanger
+    <paul.belanger@polybeacon.com>
+  * Reformatting for puppet-lint Signed-off-by: Paul Belanger
+    <paul.belanger@polybeacon.com>
+ 
+ Andreas Jaggi <x-way@waterwave.ch> (2):
+  * Remove trailing whitespace in comment
+  * Add puppet-lint and rspec-puppet gem for Travis CI
+ 
+ sathlan <mypublicaddress-code@ymail.com> (2):
+  * Adding basic tests.
+  * Cleanup.
+ 
+ Branan Purvine-Riley <branan@puppetlabs.com> (1):
+  * Fix module name to make the PMT happier
+ 
+ Dustin J. Mitchell <dustin@mozilla.com> (1):
+  * Include concat::setup from concat, so users don't need to
+ 
+ Dustin J. Mitchell <dustin@v.igoro.us> (1):
+  * Remove spurious 'e' character.
+ 
+ Gildas Le Nadan <mael@tirnamban.org> (1):
+  * add information about concat_basedir and the need for pluginsync = true
+    at least once
+ 
+ R.I.Pienaar <rip@devco.net> (1):
+  * Prepare for version 0.2.0
+ 
+ Sharif Nassar <sharif@mediatemple.net> (1):
+  * Fail with helpful advice if $::concat_basedir is not yet set
+ 
+2012-04-30 R.I.Pienaar <rip@devco.net> - 0.1.0
+===============================================
+ * no changes since the previous version.

@@ -1,0 +1,150 @@
+#! /bin/bash
+set -u
+set -e
+
+<%# These erb templates are order dependant since `platform_check` relies on
+    functions that are now in the shared functions template.
+%>
+<%= scope.function_template(["pe_repo/partials/shared_functions.bash.erb"]) %>
+<%= scope.function_template(["pe_repo/partials/platform_check.bash.erb"]) %>
+
+export OLD_PUPPET_BIN_DIR="/opt/puppet/bin"
+
+puppet_bin_dir() {
+    if [ -e "${PUPPET_BIN_DIR?}/puppet" ]; then
+        t_puppet_bin_dir="${PUPPET_BIN_DIR?}"
+    else
+        t_puppet_bin_dir="${OLD_PUPPET_BIN_DIR?}"
+    fi
+    echo "${t_puppet_bin_dir?}"
+}
+
+# Are we upgradeing from 3.8.x or 2015.2+ ?
+ORIGINAL_PUPPET_BIN_DIR=$(puppet_bin_dir)
+
+upgrading_from_38x() {
+    [ "${ORIGINAL_PUPPET_BIN_DIR?}" = "${OLD_PUPPET_BIN_DIR?}" ]
+}
+
+# Backup the old hiera.yaml, because rpm, for example will remove it
+# when pe-hiera package is uninstalled
+backup_hiera_yaml() {
+    t_timestamp=$(date +'%Y%m%d%H%M%s')
+    t_hiera_yaml_backup="/etc/puppetlabs/puppet/hiera.yaml-${t_timestamp?}.bak"
+    echo "Backing up hiera.yaml to ${t_hiera_yaml_backup?}"
+    cp /etc/puppetlabs/puppet/hiera.yaml "${t_hiera_yaml_backup?}"
+    HIERA_YAML_BACKUP=${t_hiera_yaml_backup?}
+    # The pe-migration-code.rb script will look for this environment variable.
+    export HIERA_YAML_BACKUP
+}
+
+# Backup the old puppet.conf so that it is available for trouble shooting.
+backup_puppet_conf() {
+    t_timestamp=$(date +'%Y%m%d%H%M%s')
+    t_puppet_conf_backup="/etc/puppetlabs/puppet/puppet.conf-${t_timestamp?}.bak"
+    echo "Backing up puppet.conf to ${t_puppet_conf_backup?}"
+    cp /etc/puppetlabs/puppet/puppet.conf "${t_puppet_conf_backup?}"
+}
+
+check_package() {
+    pkg="${1?}"
+    output=$("$(puppet_bin_dir)/puppet" resource package "${pkg?}" 2> /dev/null)
+    case ${output?} in
+        *ensure*=\>*purged*)
+            return 1;;
+        *ensure*=\>*absent*)
+            return 1;;
+        *)
+            return 0;;
+    esac
+}
+
+ensure_service() {
+    pkg=${1?}
+    state=${2?}
+    "$(puppet_bin_dir)/puppet" resource service "${pkg?}" ensure=${state?}
+    return $?
+}
+
+# If you need to force the code migration during a compile master upgrade (say
+# on a second running of the upgrade script, which won't detect that it was
+# upgradiang from 3.8.x if puppet-agent has already been installed), then you
+# can supply FORCE_PE_CODE_MIGRATION=1 in your environment to ensure that the
+# code migration script runs to update puppet.conf and hiera.yaml.  But you
+# will also need to set HIERA_YAML_BACKUP to the location of your 3.8.x
+# hiera.yaml file if one was being used.
+run_pe_code_migration() {
+    t_code_migration_url="${1?}"
+
+    if upgrading_from_38x || [ "${FORCE_PE_CODE_MIGRATION:-false}" != "false" ]; then
+        echo " * Preparing to run script to update puppet.conf and hiera.yaml"
+        t_install_file=$(mktempfile)
+        if ! download_from_url "${t_code_migration_url?}" "${t_install_file?}"; then
+            fail "Unable to retrieve code migration script from '${t_code_migration_url?}'"
+        fi
+
+        "${PUPPET_BIN_DIR?}/ruby" "${t_install_file?}" || fail "Error running code migration script: ${t_install_file?}"
+    else
+        return 0
+    fi
+}
+
+# Discover services
+t_38x_services=(pe-puppet pe-mcollective)
+t_compile_or_amq_services=(pe-puppetserver pe-activemq)
+t_puppet_agent_services=(puppet mcollective)
+t_shutdown_services=()
+
+if [ -e "$(puppet_bin_dir)/puppet" ]; then
+    for service in "${t_compile_or_amq_services[@]?}"; do
+        if check_package ${service?}; then
+            t_shutdown_services+=(${service?})
+        fi
+    done
+
+    if upgrading_from_38x; then
+        for service in "${t_38x_services[@]?}"; do
+            ensure_service "${service?}" stopped
+        done
+    else
+        for service in "${t_puppet_agent_services[@]?}"; do
+            ensure_service "${service?}" stopped
+        done
+    fi
+
+    for service in "${t_shutdown_services[@]?}"; do
+        ensure_service "${service?}" stopped
+    done
+fi
+
+# Before upgrading packages on 3.8.x
+if upgrading_from_38x; then
+    backup_hiera_yaml
+    backup_puppet_conf
+    echo "Moving old puppet enterprise modules aside to /opt/puppet/share/puppet/modules.bak"
+    mv /opt/puppet/share/puppet/modules /opt/puppet/share/puppet/modules.bak
+fi
+
+t_remote_installer_url="https://<%= @master %>:<%= @port %><%= @prefix %>/<%= @pe_version %>"
+
+run_agent_install_from_url "${t_remote_installer_url?}/install.bash" "$@"
+
+# Package installation may have re-started the service
+ensure_service puppet stopped
+
+# Run puppet to get most up to date version of the node.  Do not use -t,
+# because there will be changes, and we don't want to halt the script here
+# because Puppet returns a 2 (we are running set -e)
+"${PUPPET_BIN_DIR?}/puppet" agent --onetime --verbose --ignorecache --no-daemonize --no-usecacheonfailure --no-splay --show_diff
+
+# Expects:
+# * HIERA_YAML_BACKUP
+run_pe_code_migration "${t_remote_installer_url?}/pe-code-migration.rb"
+
+# Start services that have been previously shutdown
+for service in "${t_shutdown_services[@]?}" "${t_puppet_agent_services[@]?}"; do
+    ensure_service "${service?}" running
+done
+
+# ...and we should be good.
+exit 0

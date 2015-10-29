@@ -1,0 +1,14 @@
+{
+  "name": "puppetlabs-pe_console_prune",
+  "version": "0.1.1-9-gfc256c0",
+  "author": "Puppet Labs",
+  "summary": "PE console database prune cron job management",
+  "license": "Puppet Enterprise Software License Agreement",
+  "source": "git@github.com:puppetlabs/puppetlabs-pe_console_prune.git",
+  "project_page": "https://github.com/puppetlabs/puppetlabs-pe_console_prune",
+  "issues_url": null,
+  "dependencies": [
+  
+  ],
+  "description": "PE console database prune cron job management"
+}

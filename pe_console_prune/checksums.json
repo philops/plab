@@ -1,0 +1,11 @@
+{
+  "CHANGELOG": "bb6599d407e64bc07d2454487741e55a",
+  "Gemfile": "b2fddc7eeed30526454d1271f6a0b7f3",
+  "README.md": "922b2a7064c79d00255012cf99d08d3b",
+  "Rakefile": "337a07397a426a2711217987c6d5be8c",
+  "manifests/init.pp": "068ef223d247b1c206bcdf95a777ae7c",
+  "metadata.json": "c965f8b8bcb4b30d5743f81cc307c8e1",
+  "spec/classes/pe_console_prune_spec.rb": "ee3edc78e439ed9db10eb912bdf8b5cf",
+  "spec/spec_helper.rb": "3ea886dd135e120afa31e0aab12e85b0",
+  "tests/init.pp": "79f1c9118072584cfd2a0592859f72fc"
+}

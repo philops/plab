@@ -1,0 +1,22 @@
+{
+  "CHANGELOG": "81124bda1889df20e74897081fc8a402",
+  "CONTRIBUTING.md": "2164b2e35c9ec93ed3fb56c5a58f6bfd",
+  "Gemfile": "e2e59547bc09a3c8c8b2a610274dac54",
+  "Gemfile.lock": "548f76b405dda7ee283f59af312fd3e6",
+  "README.md": "c7bd785733e044ac0524bf628c48809b",
+  "Rakefile": "fef15c7227bd7320017f66c394763f2d",
+  "examples/commands.aug": "db7c6fc91f177473fe43f8faac49c471",
+  "examples/example-nginx.conf": "8dfabd95239b38863f83c4729a591dac",
+  "examples/vhost.pp": "cc4f11351ce1fdee577ead5b531f8f80",
+  "manifests/directive.pp": "12ba11ad3383cfcf71891e7e56fff6da",
+  "manifests/init.pp": "4906d1df9e9717b69cad668e0be2fe82",
+  "manifests/params.pp": "57a38aa1fa4692bef9417989009cbd49",
+  "metadata.json": "d26ceda3a6f6242f685c9b3bf2e71193",
+  "spec/classes/init_spec.rb": "8ebb1ce9412294c1ae06b1718c194647",
+  "spec/defines/directive_spec.rb": "144a3275ea4b47a892f24178778f0f68",
+  "spec/fixtures/hiera/hiera.yaml": "67b96b66d1af7403a33293dc4c9e496d",
+  "spec/fixtures/hiera/test.yaml": "6105347ebb9825ac754615ca55ff3b0c",
+  "spec/fixtures/manifests/site.pp": "d41d8cd98f00b204e9800998ecf8427e",
+  "spec/matchers/augeas_matchers.rb": "5d9f0412fe0b0136e839ae7bb540a1e0",
+  "spec/spec_helper.rb": "e18d7da61ebbd45d7df64f8fd72b03e6"
+}

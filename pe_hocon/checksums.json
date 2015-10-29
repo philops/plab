@@ -1,0 +1,23 @@
+{
+  "CHANGELOG": "b1b8458181ef0e9f8f083b94a984f953",
+  "CHANGELOG.md": "4af93038922d4b98d1432595f5a5203e",
+  "CONTRIBUTING.md": "d911815dd7d0d90b90bb35382a6e3298",
+  "Gemfile": "0bbf5be7fff09aaa13cb68bc9bc9f424",
+  "LICENSE": "519b25a3992e0598a9855e4ccd7f66a1",
+  "README.markdown": "ee5b21ecb58589b696c78dc1b40eff89",
+  "Rakefile": "de8eeacfe1fbbc6a6f4d89adfc98bcaf",
+  "lib/puppet/feature/pe_hocon.rb": "bbd4eca7117850bcef6f3be059cf250c",
+  "lib/puppet/provider/pe_hocon_setting/ruby.rb": "c0bad8a42357896675e209aab7ee6a0d",
+  "lib/puppet/type/pe_hocon_setting.rb": "204b2889d1c6db8f986f02ed17239ef5",
+  "metadata.json": "1b516611d1fac862b89dba021cbff721",
+  "spec/acceptance/conf_setting_spec.rb": "ac464969007595bd411bd9094bafc33e",
+  "spec/acceptance/nodesets/debian-73-x64.yml": "ba5a75e27644c48ad8f3564fb6d372a7",
+  "spec/acceptance/nodesets/default.yml": "ba5a75e27644c48ad8f3564fb6d372a7",
+  "spec/acceptance/nodesets/ubuntu-server-1404-x64.yml": "5f0aed10098ac5b78e4217bb27c7aaf0",
+  "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+  "spec/spec_helper.rb": "1b09547c3e8324897a9e13ea5a78916c",
+  "spec/spec_helper_acceptance.rb": "2bf9e55e9e5393f39edaf04ddc7fbe88",
+  "spec/unit/puppet/provider/conf_setting/ruby_spec.rb": "738a981b56723931aec460f6a71e180a",
+  "spec/unit/puppet/type/hocon_setting_spec.rb": "6e650a211f00c5969669aa22b09f1c20",
+  "tests/hocon_setting.pp": "a84ff56b38161b78de95ddddb2d9e631"
+}

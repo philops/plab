@@ -1,0 +1,29 @@
+2015-06-12 Brandon High <highb@users.noreply.github.com> - 2015.2.0-rc0
+========================================================================
+ Eric Williamson <eric.williamson@puppetlabs.com> (19):
+  * (PE-8097) Initial class to manage install of nginx
+  * (PE-8097) Initial class for managing nginx service
+  * (PE-8097) Update readme with notes on module design
+  * (PE-8097) Combine install/service.pp into init.pp
+  * (maint) fix metadata.json file so it will build
+  * (PE-8097) Add custom nginx augeas lense
+  * (PE-8097) Add params.pp with packaging defaults
+  * (PE-8097) Initial defined type for setting a directive
+  * (PE-8097) Rename package from 'pe-httpd' to 'pe-nginx'
+  * (PE-9801) Add a comment parameter
+  * (PE-9803) Add support for complex contexts
+  * (maint) Align params
+  * (maint) Update nginx lense with upstream fixes for indentation
+  * (PE-9801) Fix comment change command to avoid duplicate comments
+  * (PE-9804) Support adding multiple directives with same name
+  * (maint) fix spec tests
+  * (maint) Set augeas load_path
+  * (PE-9645) Update README.md
+  * (PE-10245) Remove embedded augeas lense
+ 
+ mwbutcher <mwbutcher@puppetlabs.com> (1):
+  * (PE-9494) Nginx support custom cert for PE web UI
+ 
+2015-05-07 Eric Williamson <eric.williamson@puppetlabs.com> - 0.0.1
+====================================================================
+ * no changes since the previous version.

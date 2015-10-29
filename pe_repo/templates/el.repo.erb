@@ -1,0 +1,8 @@
+[pe_repo]
+name=Puppet Labs PE Packages \$releasever - \$basearch
+baseurl=https://<%= @master %>:<%= @port %><%= @prefix %>/<%= @pe_version %>/<%= @installer_build %>
+enabled=1
+gpgcheck=1
+sslverify=False
+proxy=_none_
+gpgkey=https://<%= @master %>:<%= @port %><%= @prefix %>/GPG-KEY-puppetlabs

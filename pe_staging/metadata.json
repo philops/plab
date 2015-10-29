@@ -1,0 +1,14 @@
+{
+  "name": "puppetlabs-pe_staging",
+  "version": "0.3.3-21-g9a4d398",
+  "author": "puppetlabs",
+  "summary": "File Staging",
+  "license": "Puppet Enterprise Software License Agreement",
+  "source": "git@github.com:puppetlabs/pe_staging.git",
+  "project_page": "https://github.com/puppetlabs/pe_staging",
+  "issues_url": null,
+  "dependencies": [
+  
+  ],
+  "description": "Manages file staging."
+}

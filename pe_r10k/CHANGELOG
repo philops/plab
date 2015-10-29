@@ -1,0 +1,45 @@
+2015-09-01 Alex Dreyer <dutret@gmail.com> - 2015.2.1
+=====================================================
+ Adrien Thebo <git@somethingsinistral.net> (3):
+  * (maint) Add documentation for git_settings config param
+  * (PE-11512) Add 'postrun' command to module
+  * (maint) fixup AIO path change induced spec failures
+ 
+ James Sweeny <james.sweeny@puppetlabs.com> (1):
+  * (#PE-11624) Add Forge settings support
+ 
+2015-06-17 Adrien Thebo <git@somethingsinistral.net> - 2015.2.0-rc0
+====================================================================
+ Adrien Thebo <git@somethingsinistral.net> (7):
+  * (CODEMGMT-174) Install pe-r10k package
+  * (CODEMGMT-191) Manage r10k local bin symlinks
+  * Revert "Merge pull request #3 from
+    adrienthebo/issue/master/codemgmt-191-usr-local-bin-symlinks"
+  * (maint) Use puppet_enterprise module functions
+  * (maint) Use .fixtures.yml to make spec symlinks
+  * (maint) install pe-r10k before managing r10k config
+  * (CODEMGMT-199) Revert "(PE-10068) Ensure pe-code-manager instead of
+    pe-r10k"
+ 
+ jbondpdx <jean@puppetlabs.com> (5):
+  * DOC-2038: edit pe_r10k module README
+  * DOC-2038: edit pe_r10k module README
+  * DOC-2038: edits on pe_r10k module README
+  * DOC-2038 edits to pe_r10k module README
+  * DOC-2038: edits to pe_r10k README
+ 
+ Zack Smith <zack@puppetlabs.com> (2):
+  * (PE-10265) Breakout package as class
+  * (CODEMGMT-204) use settings for environmentpath
+ 
+ Josh Partlow <joshua.partlow@puppetlabs.com> (1):
+  * (PE-10068) Ensure pe-code-manager instead of pe-r10k
+ 
+2015-05-13 Rob Braden <bradejr@puppetlabs.com> - 0.0.2-alpha
+=============================================================
+ Rob Braden <bradejr@puppetlabs.com> (1):
+  * (maint) update metadata.json for 0.0.2-alpha
+ 
+2015-05-12 Adrien Thebo <git@somethingsinistral.net> - 0.0.1-alpha
+===================================================================
+ * no changes since the previous version.

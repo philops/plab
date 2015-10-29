@@ -1,0 +1,21 @@
+{
+  "CHANGELOG": "b3a9c57d034717ffeff62e97f014f5ce",
+  "Gemfile": "4283eb2be3d6d2d4257a404b25d4d682",
+  "LICENSE": "fe4af991f3c1052956fe4fbc42db0d84",
+  "README.markdown": "1ee4973e54ec9f30234f4f1eb3207b57",
+  "Rakefile": "0254db5d3fc38c67a2c160d7296a24f8",
+  "manifests/config.pp": "6ccb958257958081c9fa0ad65b54f96f",
+  "manifests/init.pp": "123d43f84931cd31a03963679acb73ef",
+  "manifests/package.pp": "5380bdd02d7cf30c5501b5ffbe411ecf",
+  "manifests/params.pp": "6c8914acde098a26039933ac157c6354",
+  "metadata.json": "1093924a4d0b76721c11c307f235503a",
+  "spec/acceptance/nodesets/default.yml": "b8b61bdbe188e1e9b979a889d836cee4",
+  "spec/acceptance/nodesets/vmpooler.yml": "16d305fb799630f7b4607d16ea6fb9b4",
+  "spec/acceptance/pe_r10k_config_spec.rb": "024607dffb892a51d6685905da1f3a8c",
+  "spec/classes/config_spec.rb": "503b219bf631e9b8e81985400a002ab6",
+  "spec/classes/package_spec.rb": "7f9b0b6b6c99656c640a0d7d73218901",
+  "spec/classes/pe_r10k_spec.rb": "304c6f229964421e3d76526d8b2fe27d",
+  "spec/spec_helper.rb": "5cf484216603fa10ca29bdefb3c6d553",
+  "spec/spec_helper_acceptance.rb": "fd457ab41c4b8ee21b681891d3c80f35",
+  "templates/r10k.yaml.erb": "be89a8adbd883e742999ba82fb1435c6"
+}

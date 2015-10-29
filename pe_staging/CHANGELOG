@@ -1,0 +1,8 @@
+2014-02-19 Nick Lewis <nick@puppetlabs.com> - 0.3.2
+====================================================
+ Eric Williamson <eric.williamson@puppetlabs.com> (1):
+  * (PE-2718) Dynamically generate the module version
+ 
+2014-01-17 Eric Williamson <eric.williamson@puppetlabs.com> - 0.3.1
+====================================================================
+ * no changes since the previous version.
